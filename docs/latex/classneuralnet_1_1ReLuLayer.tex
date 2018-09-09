@@ -1,0 +1,154 @@
+\hypertarget{classneuralnet_1_1ReLuLayer}{}\section{neuralnet\+:\+:Re\+Lu\+Layer Class Reference}
+\label{classneuralnet_1_1ReLuLayer}\index{neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}}
+
+
+Hidden layer with rectifier activation function.  
+
+
+
+
+{\ttfamily \#include $<$rectified\+\_\+linear\+\_\+unit\+\_\+layer.\+hpp$>$}
+
+
+
+Inheritance diagram for neuralnet\+:\+:Re\+Lu\+Layer\+:
+% FIG 0
+
+
+Collaboration diagram for neuralnet\+:\+:Re\+Lu\+Layer\+:
+% FIG 1
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classneuralnet_1_1ReLuLayer_a38812efc6cee58ae2e076a14dd2e76c0}\label{classneuralnet_1_1ReLuLayer_a38812efc6cee58ae2e076a14dd2e76c0}} 
+void \hyperlink{classneuralnet_1_1ReLuLayer_a38812efc6cee58ae2e076a14dd2e76c0}{Initialize\+Weights} ()
+\begin{DoxyCompactList}\small\item\em Initializes weights using normal distribution with 0 mean and sqrt(2 / \#inputs) standard deviation. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1ReLuLayer_a8828d7147d25d9854452e9d2e1e79857}{Forward\+Prop\+Cpu} (const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Given input computes neurons\textquotesingle{} activations and applies rectifier function using cpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1ReLuLayer_a97dd16df35d4fb139e955d9a9acc2284}{Forward\+Prop\+Gpu} (const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Given input computes neurons\textquotesingle{} activations and applies rectifier function using gpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1ReLuLayer_a41da88c3eace20c2d8d2c397a9feb9d8}{Back\+Prop\+Cpu} (const std\+::vector$<$ double $>$ \&weighted\+\_\+error\+\_\+top, const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights and weighted error of this layer using cpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1ReLuLayer_aafc499ba5e1de303b447ad1abb26f914}{Back\+Prop\+Gpu} (const std\+::vector$<$ double $>$ \&weighted\+\_\+error\+\_\+top, const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights and weighted error of this layer using gpu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Hidden layer with rectifier activation function. 
+
+Rectifier is defined as\+: R(x) = max(0, x). 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1ReLuLayer_a41da88c3eace20c2d8d2c397a9feb9d8}\label{classneuralnet_1_1ReLuLayer_a41da88c3eace20c2d8d2c397a9feb9d8}} 
+\index{neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}!Back\+Prop\+Cpu@{Back\+Prop\+Cpu}}
+\index{Back\+Prop\+Cpu@{Back\+Prop\+Cpu}!neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}}
+\subsubsection{\texorpdfstring{Back\+Prop\+Cpu()}{BackPropCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Re\+Lu\+Layer\+::\+Back\+Prop\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{weighted\+\_\+error,  }\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes velocity of weights and weighted error of this layer using cpu. 
+
+This function should write to error\+\_\+, velocity\+\_\+ and weighted\+\_\+error\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output. Note that if this layer is an output layer then target output should be passed as a weighted\+\_\+error. In case this layer is first in network\textquotesingle{}s topology, network\textquotesingle{}s input should be passed as a prev\+\_\+layer\+\_\+output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em weighted\+\_\+error} & Weighted sum of succeeding layer\textquotesingle{}s error for each neuron in this layer with coefficients being weights of connections with these neurons. \\
+\hline
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_acb789462daab9227ff4ce6f7332bd38c}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1ReLuLayer_aafc499ba5e1de303b447ad1abb26f914}\label{classneuralnet_1_1ReLuLayer_aafc499ba5e1de303b447ad1abb26f914}} 
+\index{neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}!Back\+Prop\+Gpu@{Back\+Prop\+Gpu}}
+\index{Back\+Prop\+Gpu@{Back\+Prop\+Gpu}!neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}}
+\subsubsection{\texorpdfstring{Back\+Prop\+Gpu()}{BackPropGpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Re\+Lu\+Layer\+::\+Back\+Prop\+Gpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{weighted\+\_\+error,  }\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes velocity of weights and weighted error of this layer using gpu. 
+
+This function should write to error\+\_\+, velocity\+\_\+ and weighted\+\_\+error\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output. Note that if this layer is an output layer then target output should be passed as a weighted\+\_\+error. In case this layer is first in network\textquotesingle{}s topology, network\textquotesingle{}s input should be passed as a prev\+\_\+layer\+\_\+output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em weighted\+\_\+error} & Weighted sum of succeeding layer\textquotesingle{}s error for each neuron in this layer with coefficients being weights of connections with these neurons. \\
+\hline
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_aa81e9cfb0eaf5e17b38e011c4f56f042}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1ReLuLayer_a8828d7147d25d9854452e9d2e1e79857}\label{classneuralnet_1_1ReLuLayer_a8828d7147d25d9854452e9d2e1e79857}} 
+\index{neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}!Forward\+Prop\+Cpu@{Forward\+Prop\+Cpu}}
+\index{Forward\+Prop\+Cpu@{Forward\+Prop\+Cpu}!neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}}
+\subsubsection{\texorpdfstring{Forward\+Prop\+Cpu()}{ForwardPropCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Re\+Lu\+Layer\+::\+Forward\+Prop\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Given input computes neurons\textquotesingle{} activations and applies rectifier function using cpu. 
+
+Rectifier is defined as\+: R(x) = max(0, x).
+
+Writes to activation\+\_\+ and output\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_a3aa08517de6a73640cd0e511c134b231}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1ReLuLayer_a97dd16df35d4fb139e955d9a9acc2284}\label{classneuralnet_1_1ReLuLayer_a97dd16df35d4fb139e955d9a9acc2284}} 
+\index{neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}!Forward\+Prop\+Gpu@{Forward\+Prop\+Gpu}}
+\index{Forward\+Prop\+Gpu@{Forward\+Prop\+Gpu}!neuralnet\+::\+Re\+Lu\+Layer@{neuralnet\+::\+Re\+Lu\+Layer}}
+\subsubsection{\texorpdfstring{Forward\+Prop\+Gpu()}{ForwardPropGpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Re\+Lu\+Layer\+::\+Forward\+Prop\+Gpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Given input computes neurons\textquotesingle{} activations and applies rectifier function using gpu. 
+
+Rectifier is defined as\+: R(x) = max(0, x).
+
+Writes to activation\+\_\+ and output\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_abd0fdf1146eb28485349337e68ad7982}{neuralnet\+::\+Layer}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/layers/rectified\+\_\+linear\+\_\+unit\+\_\+layer.\+hpp\item 
+src/layers/rectified\+\_\+linear\+\_\+unit\+\_\+layer.\+cpp\end{DoxyCompactItemize}

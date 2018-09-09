@@ -1,0 +1,301 @@
+\hypertarget{classneuralnet_1_1Net}{}\section{neuralnet\+:\+:Net Class Reference}
+\label{classneuralnet_1_1Net}\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+
+
+Abstraction of feedforward neural network.  
+
+
+
+
+{\ttfamily \#include $<$net.\+hpp$>$}
+
+
+
+Collaboration diagram for neuralnet\+:\+:Net\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classneuralnet_1_1Net_ab42c28638b8bf8098a5fe08b3a656c3b}{Net} (int input\+\_\+layer\+\_\+size, bool gpu\+\_\+flag)
+\begin{DoxyCompactList}\small\item\em Constructs an empty network. \end{DoxyCompactList}\item 
+\hyperlink{classneuralnet_1_1Net_afd6ca6af4811bbb6b2b4ee9de6429cea}{Net} (int input\+\_\+layer\+\_\+size, bool gpu\+\_\+flag, std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1NetIoHandler}{Net\+Io\+Handler} $>$ io\+\_\+handler)
+\begin{DoxyCompactList}\small\item\em Constructs an empty network. \end{DoxyCompactList}\item 
+double \hyperlink{classneuralnet_1_1Net_a0b2faa9eb2faffdaf01ed8b5318fe069}{Get\+Loss} (const std\+::vector$<$ double $>$ \&target\+\_\+output)
+\begin{DoxyCompactList}\small\item\em Given target output of most recent forward pass computes loss of output layer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_af43ecafb444803ac91367825096052d8}\label{classneuralnet_1_1Net_af43ecafb444803ac91367825096052d8}} 
+void \hyperlink{classneuralnet_1_1Net_af43ecafb444803ac91367825096052d8}{Save} (std\+::string file\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Exports network to a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_a1b973c09cf9e8ec516d03f81eb14b415}\label{classneuralnet_1_1Net_a1b973c09cf9e8ec516d03f81eb14b415}} 
+void \hyperlink{classneuralnet_1_1Net_a1b973c09cf9e8ec516d03f81eb14b415}{Load} (std\+::string file\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Imports network to a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_ad3c10cfac5fdcec2875d124e22cc04a3}\label{classneuralnet_1_1Net_ad3c10cfac5fdcec2875d124e22cc04a3}} 
+int \hyperlink{classneuralnet_1_1Net_ad3c10cfac5fdcec2875d124e22cc04a3}{Get\+Num\+Inputs} () const
+\begin{DoxyCompactList}\small\item\em Returns number of inputs to a network. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_a1b75a3924917dc61febb4ec6d24cf770}\label{classneuralnet_1_1Net_a1b75a3924917dc61febb4ec6d24cf770}} 
+int \hyperlink{classneuralnet_1_1Net_a1b75a3924917dc61febb4ec6d24cf770}{Get\+Num\+Layers} () const
+\begin{DoxyCompactList}\small\item\em Returns number of layer\textquotesingle{}s discounting input layer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_ae34f89c48ac47af9753360b5de77bdc7}\label{classneuralnet_1_1Net_ae34f89c48ac47af9753360b5de77bdc7}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1Layer}{Layer} $>$ $>$ \hyperlink{classneuralnet_1_1Net_ae34f89c48ac47af9753360b5de77bdc7}{Get\+Layers} ()
+\begin{DoxyCompactList}\small\item\em Returns network\textquotesingle{}s layers. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Net_a71e15d9dbe5a60eb35fcceb7c5c93624}{Add\+Layer} (std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1Layer}{Layer} $>$ layer, int num\+\_\+neurons)
+\begin{DoxyCompactList}\small\item\em Adds layer to the end of the network and initializes its weights with layer specific default algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Net_a12e3eab09024035ce46c8034138d8a62}{Add\+Layer} (std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1Layer}{Layer} $>$ layer, int num\+\_\+neurons, \hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy} \&init\+\_\+strategy)
+\begin{DoxyCompactList}\small\item\em Adds layer to the end of the network and initializes its weights with provided strategy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_a0457c5c1ef86b843f4096a8ace3ad908}\label{classneuralnet_1_1Net_a0457c5c1ef86b843f4096a8ace3ad908}} 
+void \hyperlink{classneuralnet_1_1Net_a0457c5c1ef86b843f4096a8ace3ad908}{Set\+Gpu\+Flag} ()
+\begin{DoxyCompactList}\small\item\em Sets flag controlling whether gpu implementation is used. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_a3dcd162920af37bf02fcfaf9cb759f0d}\label{classneuralnet_1_1Net_a3dcd162920af37bf02fcfaf9cb759f0d}} 
+void \hyperlink{classneuralnet_1_1Net_a3dcd162920af37bf02fcfaf9cb759f0d}{Clear\+Gpu\+Flag} ()
+\begin{DoxyCompactList}\small\item\em Clears flag controlling whether gpu implementation is used. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Net_a0129f8d6a5e624665cd3922fef79493d}{Forward\+Prop} (const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Propagates input forward through all layers. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Net_af6d95fdc4ccdc37d7150668fc74e8a36}{Back\+Prop} (const std\+::vector$<$ double $>$ \&target\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Propagates backward through layers using mini-\/batch momentum backpropagation algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Net_a541fcd626459752b0de09a2a150f3d2a}{Update} (double learning\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Updates weights of every layer using velocity accumulated across forward-\/backward passes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_a6fd85deb3c82bfe77ac7d6be2a539b9a}\label{classneuralnet_1_1Net_a6fd85deb3c82bfe77ac7d6be2a539b9a}} 
+void \hyperlink{classneuralnet_1_1Net_a6fd85deb3c82bfe77ac7d6be2a539b9a}{Reset\+Velocity} ()
+\begin{DoxyCompactList}\small\item\em Sets velocity of every layer to zeros. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classneuralnet_1_1Net_aa84c702ce8abcb7b034348d94f919838}{gpu\+\_\+flag\+\_\+} = false
+\item 
+int \hyperlink{classneuralnet_1_1Net_ae229ac240ce45c28d36d82bfb9bc1049}{input\+\_\+layer\+\_\+size\+\_\+}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1Layer}{Layer} $>$ $>$ \hyperlink{classneuralnet_1_1Net_a4aa4d82f8323fccb58eccb06a52bf0bf}{layers\+\_\+}
+\item 
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{classneuralnet_1_1Net_a477cc97557f82094b4787b7ebddaaf7f}{output\+\_\+}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1NetIoHandler}{Net\+Io\+Handler} $>$ \hyperlink{classneuralnet_1_1Net_a667dea73a52e84a82f7fff1da84cb9b7}{io\+\_\+handler\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classneuralnet_1_1Net_a7af2d148b6d7436ce8f92759bf09dbf3}\label{classneuralnet_1_1Net_a7af2d148b6d7436ce8f92759bf09dbf3}} 
+class {\bfseries Net\+Io\+Handler}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstraction of feedforward neural network. 
+
+\hyperlink{classneuralnet_1_1Net}{Net} assembles layers together and abstracts out forward/backward propagation and updates to the level of a single entity. Network handles mini-\/batches of input laid in matrix columns and stored in a vector using row major ordering. Network created with default constructor uses \hyperlink{classneuralnet_1_1NetJsonIoHandler}{Net\+Json\+Io\+Handler} for Save and Load. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1Net_ab42c28638b8bf8098a5fe08b3a656c3b}\label{classneuralnet_1_1Net_ab42c28638b8bf8098a5fe08b3a656c3b}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Net@{Net}}
+\index{Net@{Net}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Net()}{Net()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily neuralnet\+::\+Net\+::\+Net (\begin{DoxyParamCaption}\item[{int}]{input\+\_\+layer\+\_\+size,  }\item[{bool}]{gpu\+\_\+flag }\end{DoxyParamCaption})}
+
+
+
+Constructs an empty network. 
+
+Network created with default constructor uses \hyperlink{classneuralnet_1_1NetJsonIoHandler}{Net\+Json\+Io\+Handler} for Save and Load.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+\_\+layer\+\_\+size} & Size of input layer. \\
+\hline
+{\em gpu\+\_\+flag} & Flag controlling whether gpu implementation is used in computation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If input\+\_\+layer\+\_\+size is a positive number. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Net_afd6ca6af4811bbb6b2b4ee9de6429cea}\label{classneuralnet_1_1Net_afd6ca6af4811bbb6b2b4ee9de6429cea}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Net@{Net}}
+\index{Net@{Net}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Net()}{Net()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily neuralnet\+::\+Net\+::\+Net (\begin{DoxyParamCaption}\item[{int}]{input\+\_\+layer\+\_\+size,  }\item[{bool}]{gpu\+\_\+flag,  }\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1NetIoHandler}{Net\+Io\+Handler} $>$}]{io\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Constructs an empty network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+\_\+layer\+\_\+size} & Size of input layer. \\
+\hline
+{\em gpu\+\_\+flag} & Flag controlling whether gpu implementation is used in computation. \\
+\hline
+{\em io\+\_\+handler} & Shared pointer to object of class derived from \hyperlink{classneuralnet_1_1NetIoHandler}{Net\+Io\+Handler} which is used by \hyperlink{classneuralnet_1_1Net_af43ecafb444803ac91367825096052d8}{Save()} and \hyperlink{classneuralnet_1_1Net_a1b973c09cf9e8ec516d03f81eb14b415}{Load()} functions. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If input\+\_\+layer\+\_\+size is a positive number. \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1Net_a71e15d9dbe5a60eb35fcceb7c5c93624}\label{classneuralnet_1_1Net_a71e15d9dbe5a60eb35fcceb7c5c93624}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Add\+Layer@{Add\+Layer}}
+\index{Add\+Layer@{Add\+Layer}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Add\+Layer()}{AddLayer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void neuralnet\+::\+Net\+::\+Add\+Layer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1Layer}{Layer} $>$}]{layer,  }\item[{int}]{num\+\_\+neurons }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds layer to the end of the network and initializes its weights with layer specific default algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & Shared pointer to the layer you want to add.  Desired size of the layer discounting bias neuron. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If num\+\_\+neurons is not positive. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Net_a12e3eab09024035ce46c8034138d8a62}\label{classneuralnet_1_1Net_a12e3eab09024035ce46c8034138d8a62}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Add\+Layer@{Add\+Layer}}
+\index{Add\+Layer@{Add\+Layer}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Add\+Layer()}{AddLayer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void neuralnet\+::\+Net\+::\+Add\+Layer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classneuralnet_1_1Layer}{Layer} $>$}]{layer,  }\item[{int}]{num\+\_\+neurons,  }\item[{\hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy} \&}]{init\+\_\+strategy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds layer to the end of the network and initializes its weights with provided strategy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & Shared pointer to the layer you want to add. \\
+\hline
+{\em num\+\_\+neurons} & Desired size of the layer discounting bias neuron. \\
+\hline
+{\em init\+\_\+strategy} & Concrete strategy for weights initialization. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If num\+\_\+neurons is not positive. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Net_af6d95fdc4ccdc37d7150668fc74e8a36}\label{classneuralnet_1_1Net_af6d95fdc4ccdc37d7150668fc74e8a36}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Back\+Prop@{Back\+Prop}}
+\index{Back\+Prop@{Back\+Prop}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Back\+Prop()}{BackProp()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Net\+::\+Back\+Prop (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{target\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Propagates backward through layers using mini-\/batch momentum backpropagation algorithm. 
+
+For this function to work properly it has to be called after a single forward pass. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering.
+
+\begin{DoxyPrecond}{Precondition}
+There should be a Forward\+Prop preceding Back\+Prop. 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+output} & Output expected from the last Forward\+Prop call. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0,1) set. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Net_a0129f8d6a5e624665cd3922fef79493d}\label{classneuralnet_1_1Net_a0129f8d6a5e624665cd3922fef79493d}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Forward\+Prop@{Forward\+Prop}}
+\index{Forward\+Prop@{Forward\+Prop}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Forward\+Prop()}{ForwardProp()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ neuralnet\+::\+Net\+::\+Forward\+Prop (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Propagates input forward through all layers. 
+
+Network\textquotesingle{}s input is fed to the first layer and each layer\textquotesingle{}s output is fed to the next layer. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and returns mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Network\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Output of last layer in the network. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classneuralnet_1_1Net_a0b2faa9eb2faffdaf01ed8b5318fe069}\label{classneuralnet_1_1Net_a0b2faa9eb2faffdaf01ed8b5318fe069}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Get\+Loss@{Get\+Loss}}
+\index{Get\+Loss@{Get\+Loss}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Get\+Loss()}{GetLoss()}}
+{\footnotesize\ttfamily double neuralnet\+::\+Net\+::\+Get\+Loss (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{target\+\_\+output }\end{DoxyParamCaption})}
+
+
+
+Given target output of most recent forward pass computes loss of output layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+output} & Correct output to most recent minibatch of input. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classneuralnet_1_1Net_a541fcd626459752b0de09a2a150f3d2a}\label{classneuralnet_1_1Net_a541fcd626459752b0de09a2a150f3d2a}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!Update@{Update}}
+\index{Update@{Update}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Net\+::\+Update (\begin{DoxyParamCaption}\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates weights of every layer using velocity accumulated across forward-\/backward passes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em learning\+\_\+rate} & Speed with which this network accepts new information. Pick this value carefully because if it\textquotesingle{}s too big network can diverge, and if it\textquotesingle{}s too small it will take a long time time to converge. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if learning\+\_\+rate is not positive. \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1Net_aa84c702ce8abcb7b034348d94f919838}\label{classneuralnet_1_1Net_aa84c702ce8abcb7b034348d94f919838}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!gpu\+\_\+flag\+\_\+@{gpu\+\_\+flag\+\_\+}}
+\index{gpu\+\_\+flag\+\_\+@{gpu\+\_\+flag\+\_\+}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{gpu\+\_\+flag\+\_\+}{gpu\_flag\_}}
+{\footnotesize\ttfamily bool neuralnet\+::\+Net\+::gpu\+\_\+flag\+\_\+ = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+Flag controlling whether gpu implementation is used. \mbox{\Hypertarget{classneuralnet_1_1Net_ae229ac240ce45c28d36d82bfb9bc1049}\label{classneuralnet_1_1Net_ae229ac240ce45c28d36d82bfb9bc1049}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!input\+\_\+layer\+\_\+size\+\_\+@{input\+\_\+layer\+\_\+size\+\_\+}}
+\index{input\+\_\+layer\+\_\+size\+\_\+@{input\+\_\+layer\+\_\+size\+\_\+}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{input\+\_\+layer\+\_\+size\+\_\+}{input\_layer\_size\_}}
+{\footnotesize\ttfamily int neuralnet\+::\+Net\+::input\+\_\+layer\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Number of double values that network accepts as a single input in forward pass. Mini-\/batches need to have a size being a multiple of this number. \mbox{\Hypertarget{classneuralnet_1_1Net_a667dea73a52e84a82f7fff1da84cb9b7}\label{classneuralnet_1_1Net_a667dea73a52e84a82f7fff1da84cb9b7}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!io\+\_\+handler\+\_\+@{io\+\_\+handler\+\_\+}}
+\index{io\+\_\+handler\+\_\+@{io\+\_\+handler\+\_\+}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{io\+\_\+handler\+\_\+}{io\_handler\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\hyperlink{classneuralnet_1_1NetIoHandler}{Net\+Io\+Handler}$>$ neuralnet\+::\+Net\+::io\+\_\+handler\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Object handling import/export of the network to/from file. \mbox{\Hypertarget{classneuralnet_1_1Net_a4aa4d82f8323fccb58eccb06a52bf0bf}\label{classneuralnet_1_1Net_a4aa4d82f8323fccb58eccb06a52bf0bf}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!layers\+\_\+@{layers\+\_\+}}
+\index{layers\+\_\+@{layers\+\_\+}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{layers\+\_\+}{layers\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\hyperlink{classneuralnet_1_1Layer}{Layer}$>$ $>$ neuralnet\+::\+Net\+::layers\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Layers composing neural network. \mbox{\Hypertarget{classneuralnet_1_1Net_a477cc97557f82094b4787b7ebddaaf7f}\label{classneuralnet_1_1Net_a477cc97557f82094b4787b7ebddaaf7f}} 
+\index{neuralnet\+::\+Net@{neuralnet\+::\+Net}!output\+\_\+@{output\+\_\+}}
+\index{output\+\_\+@{output\+\_\+}!neuralnet\+::\+Net@{neuralnet\+::\+Net}}
+\subsubsection{\texorpdfstring{output\+\_\+}{output\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$double$>$ $>$ neuralnet\+::\+Net\+::output\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Output of the network. Output to each input of mini-\/batch is laid in columns of a matrix stored as a vector using row major ordering. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/net.\+hpp\item 
+src/net.\+cpp\end{DoxyCompactItemize}

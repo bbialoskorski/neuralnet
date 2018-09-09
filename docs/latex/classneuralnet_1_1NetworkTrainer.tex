@@ -1,0 +1,103 @@
+\hypertarget{classneuralnet_1_1NetworkTrainer}{}\section{neuralnet\+:\+:Network\+Trainer Class Reference}
+\label{classneuralnet_1_1NetworkTrainer}\index{neuralnet\+::\+Network\+Trainer@{neuralnet\+::\+Network\+Trainer}}
+
+
+Network\textquotesingle{}s training wrapper.  
+
+
+
+
+{\ttfamily \#include $<$network\+\_\+trainer.\+hpp$>$}
+
+
+
+Collaboration diagram for neuralnet\+:\+:Network\+Trainer\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classneuralnet_1_1NetworkTrainer_a4feb5bee93881dd4cd2f72cf9b957bf9}\label{classneuralnet_1_1NetworkTrainer_a4feb5bee93881dd4cd2f72cf9b957bf9}} 
+{\bfseries Network\+Trainer} (\hyperlink{classneuralnet_1_1Net}{Net} \&neural\+\_\+network)
+\item 
+virtual void \hyperlink{classneuralnet_1_1NetworkTrainer_a40f48d1edbe380ba8ef8e7782dbe7903}{Train} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&target\+\_\+outputs, double learning\+\_\+rate, double momentum, int num\+\_\+epochs)
+\begin{DoxyCompactList}\small\item\em Trains the network with provided training data and labels. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1NetworkTrainer_a41b19c85c1b35c36a8a1ee607857bf25}{Test} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&labels)
+\begin{DoxyCompactList}\small\item\em Tests network\textquotesingle{}s prediction accuracy on test data with \textquotesingle{}one hot\textquotesingle{} labels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classneuralnet_1_1Net}{Net} \& \hyperlink{classneuralnet_1_1NetworkTrainer_a779928ec8b2d74240d6b705f46ecf08a}{neural\+\_\+network\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Network\textquotesingle{}s training wrapper. 
+
+This class menages network\textquotesingle{}s training on provided dataset. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1NetworkTrainer_a41b19c85c1b35c36a8a1ee607857bf25}\label{classneuralnet_1_1NetworkTrainer_a41b19c85c1b35c36a8a1ee607857bf25}} 
+\index{neuralnet\+::\+Network\+Trainer@{neuralnet\+::\+Network\+Trainer}!Test@{Test}}
+\index{Test@{Test}!neuralnet\+::\+Network\+Trainer@{neuralnet\+::\+Network\+Trainer}}
+\subsubsection{\texorpdfstring{Test()}{Test()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Network\+Trainer\+::\+Test (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{labels }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Tests network\textquotesingle{}s prediction accuracy on test data with \textquotesingle{}one hot\textquotesingle{} labels. 
+
+Labels to each input have to be a \textquotesingle{}one hot\textquotesingle{} vectors. For each input trainer propagates it forward and schecks which neuron of network\textquotesingle{}s output layer returned the largest value and compares it with provided label. If the label corresponding to that neuron has value 1, output is counted as correct. This function accepts input in form of mini-\/batches with size being multiples of size of the network\textquotesingle{}s input layer, each input of a mini-\/batch laid in columns of a matrix stored as a vector using row major ordering.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & Vector of mini-\/batches of test data. \\
+\hline
+{\em labels} & Vector of mini-\/batches of labels corresponding to test data. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classneuralnet_1_1NetworkTrainer_a40f48d1edbe380ba8ef8e7782dbe7903}\label{classneuralnet_1_1NetworkTrainer_a40f48d1edbe380ba8ef8e7782dbe7903}} 
+\index{neuralnet\+::\+Network\+Trainer@{neuralnet\+::\+Network\+Trainer}!Train@{Train}}
+\index{Train@{Train}!neuralnet\+::\+Network\+Trainer@{neuralnet\+::\+Network\+Trainer}}
+\subsubsection{\texorpdfstring{Train()}{Train()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Network\+Trainer\+::\+Train (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{target\+\_\+outputs,  }\item[{double}]{learning\+\_\+rate,  }\item[{double}]{momentum,  }\item[{int}]{num\+\_\+epochs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Trains the network with provided training data and labels. 
+
+Trains the network with provided training data and labels using mini-\/batch gradient descent with momentum. This function accepts input in form of mini-\/batches with size being multiples of size of the network\textquotesingle{}s input layer, each input of a mini-\/batch laid in columns of a matrix stored as a vector using row major ordering. Each mini-\/batch is propagated forward and then backward through a network and then the network is updated.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & Vector of mini-\/batches of training data. \\
+\hline
+{\em target\+\_\+outputs} & Vector of mini-\/batches of labels corresponding to the training data. \\
+\hline
+{\em learning\+\_\+rate} & Speed with which this network accepts new information. Pick this value carefully because if it\textquotesingle{}s too big network can diverge, and if it\textquotesingle{}s too small it will take a long time time to converge. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation in momentum gradient descent algorithm. This value is usually 0.\+9 or 0.\+99. \\
+\hline
+{\em num\+\_\+epochs} & Number of forward-\/backward passes through the entire training data. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument(\char`\"{}learning\+\_\+rate} & has to be a positive number.\char`\"{})
+@throws std\+::invalid\+\_\+argument(\char`\"{}momentum coefficient should have a value between 0 and 1.") \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1NetworkTrainer_a779928ec8b2d74240d6b705f46ecf08a}\label{classneuralnet_1_1NetworkTrainer_a779928ec8b2d74240d6b705f46ecf08a}} 
+\index{neuralnet\+::\+Network\+Trainer@{neuralnet\+::\+Network\+Trainer}!neural\+\_\+network\+\_\+@{neural\+\_\+network\+\_\+}}
+\index{neural\+\_\+network\+\_\+@{neural\+\_\+network\+\_\+}!neuralnet\+::\+Network\+Trainer@{neuralnet\+::\+Network\+Trainer}}
+\subsubsection{\texorpdfstring{neural\+\_\+network\+\_\+}{neural\_network\_}}
+{\footnotesize\ttfamily \hyperlink{classneuralnet_1_1Net}{Net}\& neuralnet\+::\+Network\+Trainer\+::neural\+\_\+network\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Network being a subject to training. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/network\+\_\+trainer.\+hpp\item 
+src/network\+\_\+trainer.\+cpp\end{DoxyCompactItemize}

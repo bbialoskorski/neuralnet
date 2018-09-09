@@ -1,0 +1,28 @@
+\hypertarget{classneuralnet_1_1AllocationTracker}{}\section{neuralnet\+:\+:Allocation\+Tracker Class Reference}
+\label{classneuralnet_1_1AllocationTracker}\index{neuralnet\+::\+Allocation\+Tracker@{neuralnet\+::\+Allocation\+Tracker}}
+
+
+Gpu memory allocation manager printing unfreed memory on destruction.  
+
+
+
+
+{\ttfamily \#include $<$gpu\+\_\+allocation\+\_\+tracker.\+hpp$>$}
+
+
+
+Inheritance diagram for neuralnet\+:\+:Allocation\+Tracker\+:
+% FIG 0
+
+
+Collaboration diagram for neuralnet\+:\+:Allocation\+Tracker\+:
+% FIG 1
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Gpu memory allocation manager printing unfreed memory on destruction. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/gpu\+\_\+allocation\+\_\+tracker.\+hpp\end{DoxyCompactItemize}

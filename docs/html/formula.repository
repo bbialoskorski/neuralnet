@@ -1,0 +1,4 @@
+\form#0:$S(x) = \frac{1}{{1 + e^{-x}}}$
+\form#1:$MSE = \frac{1}{2n}\sum_{1=1}^{n} (Y_{i} - \hat{Y_{i}})^2$
+\form#2:$softmax(a_{j}) = \frac{e^{a_{j}}}{\sum_{i}e^{a_{i}}} $
+\form#3:$L = -y * \log{p} $

@@ -1,0 +1,629 @@
+\hypertarget{classneuralnet_1_1Layer}{}\section{neuralnet\+:\+:Layer Class Reference}
+\label{classneuralnet_1_1Layer}\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+
+
+Abstract base for unit of computation of a network.  
+
+
+
+
+{\ttfamily \#include $<$layer.\+hpp$>$}
+
+
+
+Inheritance diagram for neuralnet\+:\+:Layer\+:
+% FIG 0
+
+
+Collaboration diagram for neuralnet\+:\+:Layer\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_ab3a383cd10179d05d30fa674a334dae3}\label{classneuralnet_1_1Layer_ab3a383cd10179d05d30fa674a334dae3}} 
+int \hyperlink{classneuralnet_1_1Layer_ab3a383cd10179d05d30fa674a334dae3}{Get\+Num\+Inputs} ()
+\begin{DoxyCompactList}\small\item\em Returns number of inputs including bias. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a5fbd199b0983a81c21b366abfd59c6f1}\label{classneuralnet_1_1Layer_a5fbd199b0983a81c21b366abfd59c6f1}} 
+int \hyperlink{classneuralnet_1_1Layer_a5fbd199b0983a81c21b366abfd59c6f1}{Get\+Size} ()
+\begin{DoxyCompactList}\small\item\em Returns number of neurons in this layer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a5485e918776cf9e7c58af494e69ff88f}\label{classneuralnet_1_1Layer_a5485e918776cf9e7c58af494e69ff88f}} 
+std\+::string \hyperlink{classneuralnet_1_1Layer_a5485e918776cf9e7c58af494e69ff88f}{Get\+Layer\+Type} ()
+\begin{DoxyCompactList}\small\item\em Returns layer\textquotesingle{}s class name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_add27c4d2f2725b28a37ad9d9bbcc8f39}\label{classneuralnet_1_1Layer_add27c4d2f2725b28a37ad9d9bbcc8f39}} 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_add27c4d2f2725b28a37ad9d9bbcc8f39}{Get\+Outputs} ()
+\begin{DoxyCompactList}\small\item\em Returns vector of outputs from this layer\textquotesingle{}s neurons. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a08abff765be63911088b4e888793507f}\label{classneuralnet_1_1Layer_a08abff765be63911088b4e888793507f}} 
+std\+::vector$<$ double $>$ \& \hyperlink{classneuralnet_1_1Layer_a08abff765be63911088b4e888793507f}{Get\+Weights} ()
+\begin{DoxyCompactList}\small\item\em Returns layer\textquotesingle{}s weights matrix. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a2da35925d900e217848443a07791b575}\label{classneuralnet_1_1Layer_a2da35925d900e217848443a07791b575}} 
+virtual double \hyperlink{classneuralnet_1_1Layer_a2da35925d900e217848443a07791b575}{Get\+Loss} (const std\+::vector$<$ double $>$ \&target\+\_\+output)
+\begin{DoxyCompactList}\small\item\em Return\textquotesingle{}s layer\textquotesingle{}s loss value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a42aa0b61e8b5fae656af85a7b9d9a518}\label{classneuralnet_1_1Layer_a42aa0b61e8b5fae656af85a7b9d9a518}} 
+void \hyperlink{classneuralnet_1_1Layer_a42aa0b61e8b5fae656af85a7b9d9a518}{Set\+Gpu\+Flag} ()
+\begin{DoxyCompactList}\small\item\em Sets flag controlling whether gpu implementation is used. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a4bfdef32fbedca487e3a6b432fc40b27}\label{classneuralnet_1_1Layer_a4bfdef32fbedca487e3a6b432fc40b27}} 
+void \hyperlink{classneuralnet_1_1Layer_a4bfdef32fbedca487e3a6b432fc40b27}{Clear\+Gpu\+Flag} ()
+\begin{DoxyCompactList}\small\item\em Clears flag controlling whether gpu implementation is used. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a722c2673491edfb9c30c0f7b2fcca29a}{Initialize} (int num\+\_\+inputs, int num\+\_\+neurons)
+\begin{DoxyCompactList}\small\item\em Initializes layer by reshaping its components and generating initial weights using layer specific default algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a10b9155017dca618ca37ce3aa4546831}{Initialize} (int num\+\_\+inputs, int num\+\_\+neurons, \hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy} \&generator)
+\begin{DoxyCompactList}\small\item\em Initializes layer by reshaping its components and generating initial weights using provided strategy. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_a0fb866c5377946f7099a820d69a0b2bd}{Forward\+Prop} (const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Activates this layer\textquotesingle{}s neurons and returns output. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_acb2410cfc113d819c545132c5df33102}{Back\+Prop} (const std\+::vector$<$ double $>$ \&weighted\+\_\+error, const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights and returns weighted error of this layer. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1Layer_a98d81c554f666307c6387c9a86bb1bea}{Update} (double learning\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Updates weights matrix using velocity accumulated across training samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a6482cc828fd4b3e913b382b0141817c4}{Reshape} (int num\+\_\+inputs, int num\+\_\+neurons)
+\begin{DoxyCompactList}\small\item\em Resizes and resets members of this class to accomodate required number of inputs and neurons. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a32b8601861c0398fa4b4a8e20a80c9d2}\label{classneuralnet_1_1Layer_a32b8601861c0398fa4b4a8e20a80c9d2}} 
+virtual void \hyperlink{classneuralnet_1_1Layer_a32b8601861c0398fa4b4a8e20a80c9d2}{Initialize\+Weights} ()=0
+\begin{DoxyCompactList}\small\item\em Initializes weigths using default algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a5ab5c885d08bbf2e818a164e3875fc73}{Initialize\+Weights} (\hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy} \&generator)
+\begin{DoxyCompactList}\small\item\em Initializes weights using concrete \hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy}. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a3aa08517de6a73640cd0e511c134b231}{Forward\+Prop\+Cpu} (const std\+::vector$<$ double $>$ \&input)=0
+\begin{DoxyCompactList}\small\item\em Given input computes neurons\textquotesingle{} activations and applies activation function using cpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_abd0fdf1146eb28485349337e68ad7982}{Forward\+Prop\+Gpu} (const std\+::vector$<$ double $>$ \&input)=0
+\begin{DoxyCompactList}\small\item\em Given input computes neurons\textquotesingle{} activations and applies activation function using gpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_acb789462daab9227ff4ce6f7332bd38c}{Back\+Prop\+Cpu} (const std\+::vector$<$ double $>$ \&weighted\+\_\+error, const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)=0
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights and weighted error of this layer using cpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_aa81e9cfb0eaf5e17b38e011c4f56f042}{Back\+Prop\+Gpu} (const std\+::vector$<$ double $>$ \&weighted\+\_\+error, const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)=0
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights and weighted error of this layer using gpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a24af23aba6bd257f90344d1c3d6d38b8}{Update\+Cpu} (double learning\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Updates weights with momentum accumulated across forward-\/backward passes using cpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_af7520597d321aae360329b70f9476073}{Update\+Gpu} (double learning\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Updates weights with momentum accumulated across forward-\/backward passes using gpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a6e8f59ebde8c44d72004ba0d563b01c6}{Compute\+Activation\+Cpu} (const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Given inputs computes neurons\textquotesingle{} activations using cpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a496fe8418591fde8ea2f151ae0e8f274}{Compute\+Activation\+Gpu} (double $\ast$d\+\_\+activation, const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Given inputs computes neurons\textquotesingle{} activations using gpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_acfda6fbba248fc0bc9bebbc138e12092}{Compute\+Weighted\+Error\+Cpu} ()
+\begin{DoxyCompactList}\small\item\em Computes vector required for calculating the error term in backpropagation step for hidden layers using cpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a2990b68f97c1027baa9fdd718ed04591}{Compute\+Weighted\+Error\+Gpu} (double $\ast$d\+\_\+weighted\+\_\+error, double $\ast$d\+\_\+weights, double $\ast$d\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Computes vector required for calculating the error term in backpropagation step for hidden layers using gpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a7a2716aec90e66d785acd202b297b4bb}{Compute\+Velocity\+Cpu} (const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights using cpu. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classneuralnet_1_1Layer_a50fdc0a7f0702795eacf02b29c54f2b0}{Compute\+Velocity\+Gpu} (double $\ast$d\+\_\+velocity, const double $\ast$d\+\_\+error, const double $\ast$d\+\_\+prev\+\_\+layer\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights using gpu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classneuralnet_1_1Layer_a17192e2a166d6c93eab9e5cb1ae3ca8b}{type\+\_\+}
+\item 
+bool \hyperlink{classneuralnet_1_1Layer_aee4be6e70fb225f18923065940330a26}{gpu\+\_\+flag\+\_\+} = false
+\item 
+int \hyperlink{classneuralnet_1_1Layer_a68e1d25866b4dcc67cb2077d66903927}{num\+\_\+neurons\+\_\+} = 1
+\item 
+int \hyperlink{classneuralnet_1_1Layer_a847df7ad431ecab992715e074f4ee727}{num\+\_\+inputs\+\_\+} = 2
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_a6d62e504bac81323fb080a06b2f99341}{weights\+\_\+}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_a4c4ae4520ce043abcb2d0b47720f37dc}{velocity\+\_\+}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_a02c84d95e6a9e70e57b4f2b5d5e18ab9}{error\+\_\+}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_a848eea2f5878b342484830b311fe0e08}{activation\+\_\+}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_ac5cf4575860e583d5e6ff09841fa79ed}{output\+\_\+}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classneuralnet_1_1Layer_a0baf6630ce4d07bd22815eedec391a72}{weighted\+\_\+error\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base for unit of computation of a network. 
+
+\hyperlink{classneuralnet_1_1Layer}{Layer} uses mini-\/batch backpropagation with momentum as a learning algorithm. Classes deriving from \hyperlink{classneuralnet_1_1Layer}{Layer} have to implement Forward\+Prop\+Cpu, Forward\+Prop\+Gpu, Back\+Prop\+Cpu, Back\+Prop\+Gpu and Initialize\+Weights functions. Forward and Backward functions have to handle mini-\/batches of arbitrary size laid in matrix columns (stored in a vector using row major ordering). 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_acb2410cfc113d819c545132c5df33102}\label{classneuralnet_1_1Layer_acb2410cfc113d819c545132c5df33102}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Back\+Prop@{Back\+Prop}}
+\index{Back\+Prop@{Back\+Prop}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Back\+Prop()}{BackProp()}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::\+Back\+Prop (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{weighted\+\_\+error,  }\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Computes velocity of weights and returns weighted error of this layer. 
+
+For this function to work properly it has to be called after a single forward pass. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and returns a mini-\/batch of output. Note that if this layer is an output layer then target output should be passed as a weighted\+\_\+error. In case this layer is first in network\textquotesingle{}s topology, network\textquotesingle{}s input should be passed as a prev\+\_\+layer\+\_\+output.
+
+\begin{DoxyPrecond}{Precondition}
+There should be a Forward\+Prop preceding Back\+Prop. 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em weighted\+\_\+error} & Weighted sum of succeeding layer\textquotesingle{}s error for each neuron in this layer with coefficients being weights of connections with these neurons. \\
+\hline
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Weighted sum of this layer\textquotesingle{}s error for each input neuron excluding bias. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_acb789462daab9227ff4ce6f7332bd38c}\label{classneuralnet_1_1Layer_acb789462daab9227ff4ce6f7332bd38c}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Back\+Prop\+Cpu@{Back\+Prop\+Cpu}}
+\index{Back\+Prop\+Cpu@{Back\+Prop\+Cpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Back\+Prop\+Cpu()}{BackPropCpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Back\+Prop\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{weighted\+\_\+error,  }\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Computes velocity of weights and weighted error of this layer using cpu. 
+
+This function should write to error\+\_\+, velocity\+\_\+ and weighted\+\_\+error\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output. Note that if this layer is an output layer then target output should be passed as a weighted\+\_\+error. In case this layer is first in network\textquotesingle{}s topology, network\textquotesingle{}s input should be passed as a prev\+\_\+layer\+\_\+output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em weighted\+\_\+error} & Weighted sum of succeeding layer\textquotesingle{}s error for each neuron in this layer with coefficients being weights of connections with these neurons. \\
+\hline
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implemented in \hyperlink{classneuralnet_1_1SoftmaxOutputLayer_a7360169d36832228b4938f9ff469bb59}{neuralnet\+::\+Softmax\+Output\+Layer}, \hyperlink{classneuralnet_1_1SigmoidOutputLayer_a8020ad060ff1c3349bbf67ec3f3fccb8}{neuralnet\+::\+Sigmoid\+Output\+Layer}, and \hyperlink{classneuralnet_1_1ReLuLayer_a41da88c3eace20c2d8d2c397a9feb9d8}{neuralnet\+::\+Re\+Lu\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1Layer_aa81e9cfb0eaf5e17b38e011c4f56f042}\label{classneuralnet_1_1Layer_aa81e9cfb0eaf5e17b38e011c4f56f042}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Back\+Prop\+Gpu@{Back\+Prop\+Gpu}}
+\index{Back\+Prop\+Gpu@{Back\+Prop\+Gpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Back\+Prop\+Gpu()}{BackPropGpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Back\+Prop\+Gpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{weighted\+\_\+error,  }\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Computes velocity of weights and weighted error of this layer using gpu. 
+
+This function should write to error\+\_\+, velocity\+\_\+ and weighted\+\_\+error\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output. Note that if this layer is an output layer then target output should be passed as a weighted\+\_\+error. In case this layer is first in network\textquotesingle{}s topology, network\textquotesingle{}s input should be passed as a prev\+\_\+layer\+\_\+output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em weighted\+\_\+error} & Weighted sum of succeeding layer\textquotesingle{}s error for each neuron in this layer with coefficients being weights of connections with these neurons. \\
+\hline
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implemented in \hyperlink{classneuralnet_1_1SoftmaxOutputLayer_af3308eebc5a7acc982f4ac0b55d34fc3}{neuralnet\+::\+Softmax\+Output\+Layer}, \hyperlink{classneuralnet_1_1SigmoidOutputLayer_a0e9397124e10c8be7a7f587982e7c948}{neuralnet\+::\+Sigmoid\+Output\+Layer}, and \hyperlink{classneuralnet_1_1ReLuLayer_aafc499ba5e1de303b447ad1abb26f914}{neuralnet\+::\+Re\+Lu\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a6e8f59ebde8c44d72004ba0d563b01c6}\label{classneuralnet_1_1Layer_a6e8f59ebde8c44d72004ba0d563b01c6}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Compute\+Activation\+Cpu@{Compute\+Activation\+Cpu}}
+\index{Compute\+Activation\+Cpu@{Compute\+Activation\+Cpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Compute\+Activation\+Cpu()}{ComputeActivationCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Compute\+Activation\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Given inputs computes neurons\textquotesingle{} activations using cpu. 
+
+Activations vector is calculated by multiplying weights matrix by input matrix. Input matrix shouldn\textquotesingle{}t contain bias inputs since this function adds it artificially during computation. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a496fe8418591fde8ea2f151ae0e8f274}\label{classneuralnet_1_1Layer_a496fe8418591fde8ea2f151ae0e8f274}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Compute\+Activation\+Gpu@{Compute\+Activation\+Gpu}}
+\index{Compute\+Activation\+Gpu@{Compute\+Activation\+Gpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Compute\+Activation\+Gpu()}{ComputeActivationGpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Compute\+Activation\+Gpu (\begin{DoxyParamCaption}\item[{double $\ast$}]{d\+\_\+activation,  }\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Given inputs computes neurons\textquotesingle{} activations using gpu. 
+
+Activations vector is calculated by multiplying weights matrix by input matrix. Input matrix shouldn\textquotesingle{}t contain bias inputs since this function adds it artificially during computation. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em d\+\_\+activation} & Pointer to memory location on gpu device containing array with activations. \\
+\hline
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a7a2716aec90e66d785acd202b297b4bb}\label{classneuralnet_1_1Layer_a7a2716aec90e66d785acd202b297b4bb}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Compute\+Velocity\+Cpu@{Compute\+Velocity\+Cpu}}
+\index{Compute\+Velocity\+Cpu@{Compute\+Velocity\+Cpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Compute\+Velocity\+Cpu()}{ComputeVelocityCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Compute\+Velocity\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes velocity of weights using cpu. 
+
+velocity(t) = momentum $\ast$ velocity(t -\/ 1) + (1.\+0 -\/ momentum) $\ast$ d\+E/dW,
+
+where\+: t is a time step, d\+E/dW is a weights gradient calculated on the current mini-\/batch.
+
+This function writes to velocity\+\_\+ vector and assumes that error\+\_\+ vector has been already calculated. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+\begin{DoxyPrecond}{Precondition}
+Error term for this layer is computed and stored in errors\+\_\+. 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a50fdc0a7f0702795eacf02b29c54f2b0}\label{classneuralnet_1_1Layer_a50fdc0a7f0702795eacf02b29c54f2b0}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Compute\+Velocity\+Gpu@{Compute\+Velocity\+Gpu}}
+\index{Compute\+Velocity\+Gpu@{Compute\+Velocity\+Gpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Compute\+Velocity\+Gpu()}{ComputeVelocityGpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Compute\+Velocity\+Gpu (\begin{DoxyParamCaption}\item[{double $\ast$}]{d\+\_\+velocity,  }\item[{const double $\ast$}]{d\+\_\+error,  }\item[{const double $\ast$}]{d\+\_\+prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes velocity of weights using gpu. 
+
+velocity(t) = momentum $\ast$ velocity(t -\/ 1) + (1.\+0 -\/ momentum) $\ast$ d\+E/dW,
+
+where\+: t is a time step, d\+E/dW is a weights gradient calculated on the current mini-\/batch.
+
+This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em d\+\_\+velocity} & Pointer to memory location on gpu device containing velocity matrix. \\
+\hline
+{\em d\+\_\+error} & Pointer to memory location on gpu device containing error matrix. \\
+\hline
+{\em d\+\_\+prev\+\_\+layer\+\_\+output} & Pointer to memory location on gpu device containing array storing preceding layer\textquotesingle{}s output. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_acfda6fbba248fc0bc9bebbc138e12092}\label{classneuralnet_1_1Layer_acfda6fbba248fc0bc9bebbc138e12092}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Compute\+Weighted\+Error\+Cpu@{Compute\+Weighted\+Error\+Cpu}}
+\index{Compute\+Weighted\+Error\+Cpu@{Compute\+Weighted\+Error\+Cpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Compute\+Weighted\+Error\+Cpu()}{ComputeWeightedErrorCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Compute\+Weighted\+Error\+Cpu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes vector required for calculating the error term in backpropagation step for hidden layers using cpu. 
+
+This function writes to weighted\+\_\+error\+\_\+, Weighted error is calculated by multiplying transpose of weights matrix(without last row corresponding to bias input) by this layer\textquotesingle{}s error vector. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output. \mbox{\Hypertarget{classneuralnet_1_1Layer_a2990b68f97c1027baa9fdd718ed04591}\label{classneuralnet_1_1Layer_a2990b68f97c1027baa9fdd718ed04591}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Compute\+Weighted\+Error\+Gpu@{Compute\+Weighted\+Error\+Gpu}}
+\index{Compute\+Weighted\+Error\+Gpu@{Compute\+Weighted\+Error\+Gpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Compute\+Weighted\+Error\+Gpu()}{ComputeWeightedErrorGpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Compute\+Weighted\+Error\+Gpu (\begin{DoxyParamCaption}\item[{double $\ast$}]{d\+\_\+weighted\+\_\+error,  }\item[{double $\ast$}]{d\+\_\+weights,  }\item[{double $\ast$}]{d\+\_\+error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes vector required for calculating the error term in backpropagation step for hidden layers using gpu. 
+
+Weighted error is calculated by multiplying transpose of weights matrix (without last row corresponding to bias input) by this layer\textquotesingle{}s error vector. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em d\+\_\+weighted\+\_\+error} & Pointer to memory location on gpu device containing weighted error array. \\
+\hline
+{\em d\+\_\+weights} & Pointer to memory location on gpu device containing array storing weights matrix. \\
+\hline
+{\em d\+\_\+error} & Pointer to memory location on gpu device containing error array. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a0fb866c5377946f7099a820d69a0b2bd}\label{classneuralnet_1_1Layer_a0fb866c5377946f7099a820d69a0b2bd}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Forward\+Prop@{Forward\+Prop}}
+\index{Forward\+Prop@{Forward\+Prop}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Forward\+Prop()}{ForwardProp()}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::\+Forward\+Prop (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Activates this layer\textquotesingle{}s neurons and returns output. 
+
+This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and returns mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Output from this layer\textquotesingle{}s neurons. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a3aa08517de6a73640cd0e511c134b231}\label{classneuralnet_1_1Layer_a3aa08517de6a73640cd0e511c134b231}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Forward\+Prop\+Cpu@{Forward\+Prop\+Cpu}}
+\index{Forward\+Prop\+Cpu@{Forward\+Prop\+Cpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Forward\+Prop\+Cpu()}{ForwardPropCpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Forward\+Prop\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Given input computes neurons\textquotesingle{} activations and applies activation function using cpu. 
+
+This function should write to output\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classneuralnet_1_1SoftmaxOutputLayer_a6a18e1e7fc94cb7f3d66dfad2dcb1f85}{neuralnet\+::\+Softmax\+Output\+Layer}, \hyperlink{classneuralnet_1_1SigmoidOutputLayer_a95e0f2dcabbb16bd24a59f19eaf0999f}{neuralnet\+::\+Sigmoid\+Output\+Layer}, and \hyperlink{classneuralnet_1_1ReLuLayer_a8828d7147d25d9854452e9d2e1e79857}{neuralnet\+::\+Re\+Lu\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1Layer_abd0fdf1146eb28485349337e68ad7982}\label{classneuralnet_1_1Layer_abd0fdf1146eb28485349337e68ad7982}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Forward\+Prop\+Gpu@{Forward\+Prop\+Gpu}}
+\index{Forward\+Prop\+Gpu@{Forward\+Prop\+Gpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Forward\+Prop\+Gpu()}{ForwardPropGpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Forward\+Prop\+Gpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Given input computes neurons\textquotesingle{} activations and applies activation function using gpu. 
+
+This function should write to output\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classneuralnet_1_1SoftmaxOutputLayer_acb4f6f8739a3dedde111f11b548899f7}{neuralnet\+::\+Softmax\+Output\+Layer}, \hyperlink{classneuralnet_1_1SigmoidOutputLayer_aaaa8a49435e351e688699a3d27db5c9a}{neuralnet\+::\+Sigmoid\+Output\+Layer}, and \hyperlink{classneuralnet_1_1ReLuLayer_a97dd16df35d4fb139e955d9a9acc2284}{neuralnet\+::\+Re\+Lu\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a722c2673491edfb9c30c0f7b2fcca29a}\label{classneuralnet_1_1Layer_a722c2673491edfb9c30c0f7b2fcca29a}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Initialize()}{Initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Initialize (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+inputs,  }\item[{int}]{num\+\_\+neurons }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initializes layer by reshaping its components and generating initial weights using layer specific default algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+inputs} & Number of neurons in previous layer discounting bias. \\
+\hline
+{\em num\+\_\+neurons} & Number of neurons in this layer discounting bias. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If num\+\_\+inputs or num\+\_\+neurons is not positive. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a10b9155017dca618ca37ce3aa4546831}\label{classneuralnet_1_1Layer_a10b9155017dca618ca37ce3aa4546831}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Initialize()}{Initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Initialize (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+inputs,  }\item[{int}]{num\+\_\+neurons,  }\item[{\hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy} \&}]{generator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initializes layer by reshaping its components and generating initial weights using provided strategy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+inputs} & Number of neurons in previous layer discounting bias. \\
+\hline
+{\em num\+\_\+neurons} & Number of neurons in this layer discounting bias. \\
+\hline
+{\em generator} & Concrete strategy for weights initialization. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If num\+\_\+inputs or num\+\_\+neurons is not positive. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a5ab5c885d08bbf2e818a164e3875fc73}\label{classneuralnet_1_1Layer_a5ab5c885d08bbf2e818a164e3875fc73}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Initialize\+Weights@{Initialize\+Weights}}
+\index{Initialize\+Weights@{Initialize\+Weights}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Initialize\+Weights()}{InitializeWeights()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Initialize\+Weights (\begin{DoxyParamCaption}\item[{\hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy} \&}]{generator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes weights using concrete \hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em generator} & Instance of concrete \hyperlink{classneuralnet_1_1WeightsInitializationStrategy}{Weights\+Initialization\+Strategy}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a6482cc828fd4b3e913b382b0141817c4}\label{classneuralnet_1_1Layer_a6482cc828fd4b3e913b382b0141817c4}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Reshape@{Reshape}}
+\index{Reshape@{Reshape}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Reshape()}{Reshape()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Reshape (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+inputs,  }\item[{int}]{num\+\_\+neurons }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Resizes and resets members of this class to accomodate required number of inputs and neurons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+inputs} & Number of neurons in previous layer discounting bias. \\
+\hline
+{\em num\+\_\+neurons} & Number of neurons in this layer discounting bias. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If num\+\_\+inputs or num\+\_\+neurons is not positive. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a98d81c554f666307c6387c9a86bb1bea}\label{classneuralnet_1_1Layer_a98d81c554f666307c6387c9a86bb1bea}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Update@{Update}}
+\index{Update@{Update}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Update (\begin{DoxyParamCaption}\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates weights matrix using velocity accumulated across training samples. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em learning\+\_\+rate} & Speed with which this layer accepts new information. Pick this value carefully because if it\textquotesingle{}s too big layer can diverge, and if it\textquotesingle{}s too small it will take a long time to converge. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If learning\+\_\+rate is not positive. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a24af23aba6bd257f90344d1c3d6d38b8}\label{classneuralnet_1_1Layer_a24af23aba6bd257f90344d1c3d6d38b8}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Update\+Cpu@{Update\+Cpu}}
+\index{Update\+Cpu@{Update\+Cpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Update\+Cpu()}{UpdateCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Layer\+::\+Update\+Cpu (\begin{DoxyParamCaption}\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Updates weights with momentum accumulated across forward-\/backward passes using cpu. 
+
+Weights are updated by substracting velocity multiplied by learning\+\_\+rate from current weight.
+
+
+\begin{DoxyParams}{Parameters}
+{\em learning\+\_\+rate} & Speed with which this layer accepts new information. Pick this value carefully because if it\textquotesingle{}s too big layer can diverge, and if it\textquotesingle{}s too small it will take a long time to converge. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If learning\+\_\+rate is not positive. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \hyperlink{classneuralnet_1_1SigmoidOutputLayer_acb41e05e0cbf78f2498b39ea4e4bedb0}{neuralnet\+::\+Sigmoid\+Output\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1Layer_af7520597d321aae360329b70f9476073}\label{classneuralnet_1_1Layer_af7520597d321aae360329b70f9476073}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!Update\+Gpu@{Update\+Gpu}}
+\index{Update\+Gpu@{Update\+Gpu}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{Update\+Gpu()}{UpdateGpu()}}
+{\footnotesize\ttfamily virtual void neuralnet\+::\+Layer\+::\+Update\+Gpu (\begin{DoxyParamCaption}\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Updates weights with momentum accumulated across forward-\/backward passes using gpu. 
+
+Weights are updated by substracting velocity multiplied by learning\+\_\+rate from current weight.
+
+
+\begin{DoxyParams}{Parameters}
+{\em learning\+\_\+rate} & Speed with which this layer accepts new information. Pick this value carefully because if it\textquotesingle{}s too big layer can diverge, and if it\textquotesingle{}s too small it will take a long time to converge. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If learning\+\_\+rate is not positive. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \hyperlink{classneuralnet_1_1SigmoidOutputLayer_ae5760686dccc5dc3ebd99e5bf7e7a0b0}{neuralnet\+::\+Sigmoid\+Output\+Layer}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1Layer_a848eea2f5878b342484830b311fe0e08}\label{classneuralnet_1_1Layer_a848eea2f5878b342484830b311fe0e08}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!activation\+\_\+@{activation\+\_\+}}
+\index{activation\+\_\+@{activation\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{activation\+\_\+}{activation\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::activation\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Activation of neurons in this layer i.\+e. linear combinations of inputs of a mini-\/batch (as one dimensional vectors) with coefficients being weigths of incoming connections with correspoding neurons from previous layer. Activations of each input in a mini-\/batch are laid in columns of a matrix stored as a vector using row major ordering. \mbox{\Hypertarget{classneuralnet_1_1Layer_a02c84d95e6a9e70e57b4f2b5d5e18ab9}\label{classneuralnet_1_1Layer_a02c84d95e6a9e70e57b4f2b5d5e18ab9}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!error\+\_\+@{error\+\_\+}}
+\index{error\+\_\+@{error\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{error\+\_\+}{error\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::error\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Error values for each neuron in this layer. \mbox{\Hypertarget{classneuralnet_1_1Layer_aee4be6e70fb225f18923065940330a26}\label{classneuralnet_1_1Layer_aee4be6e70fb225f18923065940330a26}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!gpu\+\_\+flag\+\_\+@{gpu\+\_\+flag\+\_\+}}
+\index{gpu\+\_\+flag\+\_\+@{gpu\+\_\+flag\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{gpu\+\_\+flag\+\_\+}{gpu\_flag\_}}
+{\footnotesize\ttfamily bool neuralnet\+::\+Layer\+::gpu\+\_\+flag\+\_\+ = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+Flag controlling whether gpu implementation is used. \mbox{\Hypertarget{classneuralnet_1_1Layer_a847df7ad431ecab992715e074f4ee727}\label{classneuralnet_1_1Layer_a847df7ad431ecab992715e074f4ee727}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!num\+\_\+inputs\+\_\+@{num\+\_\+inputs\+\_\+}}
+\index{num\+\_\+inputs\+\_\+@{num\+\_\+inputs\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{num\+\_\+inputs\+\_\+}{num\_inputs\_}}
+{\footnotesize\ttfamily int neuralnet\+::\+Layer\+::num\+\_\+inputs\+\_\+ = 2\hspace{0.3cm}{\ttfamily [protected]}}
+
+Number of inputs to each neuron in this layer taking into account bias. \mbox{\Hypertarget{classneuralnet_1_1Layer_a68e1d25866b4dcc67cb2077d66903927}\label{classneuralnet_1_1Layer_a68e1d25866b4dcc67cb2077d66903927}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!num\+\_\+neurons\+\_\+@{num\+\_\+neurons\+\_\+}}
+\index{num\+\_\+neurons\+\_\+@{num\+\_\+neurons\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{num\+\_\+neurons\+\_\+}{num\_neurons\_}}
+{\footnotesize\ttfamily int neuralnet\+::\+Layer\+::num\+\_\+neurons\+\_\+ = 1\hspace{0.3cm}{\ttfamily [protected]}}
+
+Number of neurons in this layer discounting bias. \mbox{\Hypertarget{classneuralnet_1_1Layer_ac5cf4575860e583d5e6ff09841fa79ed}\label{classneuralnet_1_1Layer_ac5cf4575860e583d5e6ff09841fa79ed}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!output\+\_\+@{output\+\_\+}}
+\index{output\+\_\+@{output\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{output\+\_\+}{output\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::output\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Outputs of this layer\textquotesingle{}s neurons i.\+e. outputs of activation function with activations as argument. Output to each input of mini-\/batch is laid in columns of a matrix stored as a vector using row major ordering. \mbox{\Hypertarget{classneuralnet_1_1Layer_a17192e2a166d6c93eab9e5cb1ae3ca8b}\label{classneuralnet_1_1Layer_a17192e2a166d6c93eab9e5cb1ae3ca8b}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!type\+\_\+@{type\+\_\+}}
+\index{type\+\_\+@{type\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{type\+\_\+}{type\_}}
+{\footnotesize\ttfamily std\+::string neuralnet\+::\+Layer\+::type\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+String storing layer\textquotesingle{}s class name. \mbox{\Hypertarget{classneuralnet_1_1Layer_a4c4ae4520ce043abcb2d0b47720f37dc}\label{classneuralnet_1_1Layer_a4c4ae4520ce043abcb2d0b47720f37dc}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!velocity\+\_\+@{velocity\+\_\+}}
+\index{velocity\+\_\+@{velocity\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{velocity\+\_\+}{velocity\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::velocity\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Linear representation of velocity matrix using row major ordering. \mbox{\Hypertarget{classneuralnet_1_1Layer_a0baf6630ce4d07bd22815eedec391a72}\label{classneuralnet_1_1Layer_a0baf6630ce4d07bd22815eedec391a72}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!weighted\+\_\+error\+\_\+@{weighted\+\_\+error\+\_\+}}
+\index{weighted\+\_\+error\+\_\+@{weighted\+\_\+error\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{weighted\+\_\+error\+\_\+}{weighted\_error\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::weighted\+\_\+error\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Mini-\/batch of weighted error i.\+e. for each neuron in previous layer it\textquotesingle{}s a weighted sum of this layer\textquotesingle{}s error with coefficients being weights of connections to that neuron. These values are laid in columns of a matrix stored as a vector using row major ordering. \mbox{\Hypertarget{classneuralnet_1_1Layer_a6d62e504bac81323fb080a06b2f99341}\label{classneuralnet_1_1Layer_a6d62e504bac81323fb080a06b2f99341}} 
+\index{neuralnet\+::\+Layer@{neuralnet\+::\+Layer}!weights\+\_\+@{weights\+\_\+}}
+\index{weights\+\_\+@{weights\+\_\+}!neuralnet\+::\+Layer@{neuralnet\+::\+Layer}}
+\subsubsection{\texorpdfstring{weights\+\_\+}{weights\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ neuralnet\+::\+Layer\+::weights\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Linear representation of weights matrix using row major ordering. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/layers/layer.\+hpp\item 
+src/layers/layer.\+cpp\end{DoxyCompactItemize}

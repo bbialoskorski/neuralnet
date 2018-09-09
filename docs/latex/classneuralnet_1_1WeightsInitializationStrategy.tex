@@ -1,0 +1,44 @@
+\hypertarget{classneuralnet_1_1WeightsInitializationStrategy}{}\section{neuralnet\+:\+:Weights\+Initialization\+Strategy Class Reference}
+\label{classneuralnet_1_1WeightsInitializationStrategy}\index{neuralnet\+::\+Weights\+Initialization\+Strategy@{neuralnet\+::\+Weights\+Initialization\+Strategy}}
+
+
+Weights initialization interface implementing strategy design pattern.  
+
+
+
+
+{\ttfamily \#include $<$weights\+\_\+initialization\+\_\+strategy.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual double \hyperlink{classneuralnet_1_1WeightsInitializationStrategy_a9771c4acd74a10333899196d9f4ddec0}{Get\+Weight} (int num\+\_\+inputs, int num\+\_\+neurons)=0
+\begin{DoxyCompactList}\small\item\em Generates weight of connection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Weights initialization interface implementing strategy design pattern. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1WeightsInitializationStrategy_a9771c4acd74a10333899196d9f4ddec0}\label{classneuralnet_1_1WeightsInitializationStrategy_a9771c4acd74a10333899196d9f4ddec0}} 
+\index{neuralnet\+::\+Weights\+Initialization\+Strategy@{neuralnet\+::\+Weights\+Initialization\+Strategy}!Get\+Weight@{Get\+Weight}}
+\index{Get\+Weight@{Get\+Weight}!neuralnet\+::\+Weights\+Initialization\+Strategy@{neuralnet\+::\+Weights\+Initialization\+Strategy}}
+\subsubsection{\texorpdfstring{Get\+Weight()}{GetWeight()}}
+{\footnotesize\ttfamily virtual double neuralnet\+::\+Weights\+Initialization\+Strategy\+::\+Get\+Weight (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+inputs,  }\item[{int}]{num\+\_\+neurons }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generates weight of connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+inputs} & Number of inputs to the layer discounting bias. \\
+\hline
+{\em num\+\_\+neurons} & Number of neurons in layer for which we are generating weights. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/weights\+\_\+initialization\+\_\+strategy.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,222 @@
+\hypertarget{classneuralnet_1_1SigmoidOutputLayer}{}\section{neuralnet\+:\+:Sigmoid\+Output\+Layer Class Reference}
+\label{classneuralnet_1_1SigmoidOutputLayer}\index{neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}}
+
+
+Output layer with Sigmoid activation function and mean squared error cost function.  
+
+
+
+
+{\ttfamily \#include $<$sigmoid\+\_\+output\+\_\+layer.\+hpp$>$}
+
+
+
+Inheritance diagram for neuralnet\+:\+:Sigmoid\+Output\+Layer\+:
+% FIG 0
+
+
+Collaboration diagram for neuralnet\+:\+:Sigmoid\+Output\+Layer\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_afbcee0550709ea30062d457cf30c94a4}\label{classneuralnet_1_1SigmoidOutputLayer_afbcee0550709ea30062d457cf30c94a4}} 
+double \hyperlink{classneuralnet_1_1SigmoidOutputLayer_afbcee0550709ea30062d457cf30c94a4}{Get\+Loss} (const std\+::vector$<$ double $>$ \&target\+\_\+output)
+\begin{DoxyCompactList}\small\item\em Return\textquotesingle{}s layer\textquotesingle{}s loss value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_addd25979249109859e9b4ac846b70100}\label{classneuralnet_1_1SigmoidOutputLayer_addd25979249109859e9b4ac846b70100}} 
+void \hyperlink{classneuralnet_1_1SigmoidOutputLayer_addd25979249109859e9b4ac846b70100}{Initialize\+Weights} ()
+\begin{DoxyCompactList}\small\item\em Initializes weights to n $\ast$ sqrt(1 / \#inputs), where n is sampled from N(0, 1). \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1SigmoidOutputLayer_a95e0f2dcabbb16bd24a59f19eaf0999f}{Forward\+Prop\+Cpu} (const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Given input computes neurons\textquotesingle{} activations and applies sigmoid function using cpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1SigmoidOutputLayer_aaaa8a49435e351e688699a3d27db5c9a}{Forward\+Prop\+Gpu} (const std\+::vector$<$ double $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Given input computes neurons\textquotesingle{} activations and applies sigmoid function using cpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1SigmoidOutputLayer_a8020ad060ff1c3349bbf67ec3f3fccb8}{Back\+Prop\+Cpu} (const std\+::vector$<$ double $>$ \&target\+\_\+output, const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights and weighted error of this layer using cpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1SigmoidOutputLayer_a0e9397124e10c8be7a7f587982e7c948}{Back\+Prop\+Gpu} (const std\+::vector$<$ double $>$ \&target\+\_\+output, const std\+::vector$<$ double $>$ \&prev\+\_\+layer\+\_\+output, double momentum)
+\begin{DoxyCompactList}\small\item\em Computes velocity of weights and weighted error of this layer using gpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1SigmoidOutputLayer_acb41e05e0cbf78f2498b39ea4e4bedb0}{Update\+Cpu} (double learning\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Updates weights with momentum accumulated across forward-\/backward passes using cpu. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1SigmoidOutputLayer_ae5760686dccc5dc3ebd99e5bf7e7a0b0}{Update\+Gpu} (double learning\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Updates weights with momentum accumulated across forward-\/backward passes using gpu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Output layer with Sigmoid activation function and mean squared error cost function. 
+
+Sigmoid function is defined as follows\+: $S(x) = \frac{1}{{1 + e^{-x}}}$ ,
+
+whereas mean squared error is defined as\+: $MSE = \frac{1}{2n}\sum_{1=1}^{n} (Y_{i} - \hat{Y_{i}})^2$ . 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_a8020ad060ff1c3349bbf67ec3f3fccb8}\label{classneuralnet_1_1SigmoidOutputLayer_a8020ad060ff1c3349bbf67ec3f3fccb8}} 
+\index{neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}!Back\+Prop\+Cpu@{Back\+Prop\+Cpu}}
+\index{Back\+Prop\+Cpu@{Back\+Prop\+Cpu}!neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}}
+\subsubsection{\texorpdfstring{Back\+Prop\+Cpu()}{BackPropCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Sigmoid\+Output\+Layer\+::\+Back\+Prop\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{target\+\_\+output,  }\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes velocity of weights and weighted error of this layer using cpu. 
+
+Backpropagates through this layer using mean squared error as a cost function. M\+SE is defined as\+: $MSE = \frac{1}{2n}\sum_{1=1}^{n} (Y_{i} - \hat{Y_{i}})^2$.
+
+This function writes to error\+\_\+, velocity\+\_\+ and weighted\+\_\+error\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+output} & Correct output to most recent minibatch of input. \\
+\hline
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_acb789462daab9227ff4ce6f7332bd38c}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_a0e9397124e10c8be7a7f587982e7c948}\label{classneuralnet_1_1SigmoidOutputLayer_a0e9397124e10c8be7a7f587982e7c948}} 
+\index{neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}!Back\+Prop\+Gpu@{Back\+Prop\+Gpu}}
+\index{Back\+Prop\+Gpu@{Back\+Prop\+Gpu}!neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}}
+\subsubsection{\texorpdfstring{Back\+Prop\+Gpu()}{BackPropGpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Sigmoid\+Output\+Layer\+::\+Back\+Prop\+Gpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{target\+\_\+output,  }\item[{const std\+::vector$<$ double $>$ \&}]{prev\+\_\+layer\+\_\+output,  }\item[{double}]{momentum }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Computes velocity of weights and weighted error of this layer using gpu. 
+
+Backpropagates through this layer using mean squared error as a cost function. M\+SE is defined as\+: $MSE = \frac{1}{2n}\sum_{1=1}^{n} (Y_{i} - \hat{Y_{i}})^2$.
+
+This function writes to error\+\_\+, velocity\+\_\+ and weighted\+\_\+error\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+output} & Correct output to most recent minibatch of input. \\
+\hline
+{\em prev\+\_\+layer\+\_\+output} & Return value of forward step in previous layer. \\
+\hline
+{\em momentum} & Momentum coefficient for velocity calculation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If momentum value lies outside of (0, 1) set. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_aa81e9cfb0eaf5e17b38e011c4f56f042}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_a95e0f2dcabbb16bd24a59f19eaf0999f}\label{classneuralnet_1_1SigmoidOutputLayer_a95e0f2dcabbb16bd24a59f19eaf0999f}} 
+\index{neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}!Forward\+Prop\+Cpu@{Forward\+Prop\+Cpu}}
+\index{Forward\+Prop\+Cpu@{Forward\+Prop\+Cpu}!neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}}
+\subsubsection{\texorpdfstring{Forward\+Prop\+Cpu()}{ForwardPropCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Sigmoid\+Output\+Layer\+::\+Forward\+Prop\+Cpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Given input computes neurons\textquotesingle{} activations and applies sigmoid function using cpu. 
+
+Sigmoid function is defined as\+: $S(x) = \frac{1}{{1 + e^{-x}}}$ ,
+
+Writes to activation\+\_\+ and output\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_a3aa08517de6a73640cd0e511c134b231}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_aaaa8a49435e351e688699a3d27db5c9a}\label{classneuralnet_1_1SigmoidOutputLayer_aaaa8a49435e351e688699a3d27db5c9a}} 
+\index{neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}!Forward\+Prop\+Gpu@{Forward\+Prop\+Gpu}}
+\index{Forward\+Prop\+Gpu@{Forward\+Prop\+Gpu}!neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}}
+\subsubsection{\texorpdfstring{Forward\+Prop\+Gpu()}{ForwardPropGpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Sigmoid\+Output\+Layer\+::\+Forward\+Prop\+Gpu (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Given input computes neurons\textquotesingle{} activations and applies sigmoid function using cpu. 
+
+Sigmoid function is defined as\+: $S(x) = \frac{1}{{1 + e^{-x}}}$ ,
+
+Writes to output\+\_\+. This functions accepts mini-\/batch laid in matrix columns stored in a vector using row major ordering and computes a mini-\/batch of output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & \hyperlink{classneuralnet_1_1Layer}{Layer}\textquotesingle{}s input. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classneuralnet_1_1Layer_abd0fdf1146eb28485349337e68ad7982}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_acb41e05e0cbf78f2498b39ea4e4bedb0}\label{classneuralnet_1_1SigmoidOutputLayer_acb41e05e0cbf78f2498b39ea4e4bedb0}} 
+\index{neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}!Update\+Cpu@{Update\+Cpu}}
+\index{Update\+Cpu@{Update\+Cpu}!neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}}
+\subsubsection{\texorpdfstring{Update\+Cpu()}{UpdateCpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Sigmoid\+Output\+Layer\+::\+Update\+Cpu (\begin{DoxyParamCaption}\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Updates weights with momentum accumulated across forward-\/backward passes using cpu. 
+
+Weights are updated by substracting velocity multiplied by learning\+\_\+rate and divided by number of training samples from current weight.
+
+
+\begin{DoxyParams}{Parameters}
+{\em learning\+\_\+rate} & Speed with which this layer accepts new information. Pick this value carefully because if it\textquotesingle{}s too big layer can diverge, and if it\textquotesingle{}s too small it will take a long time to converge. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If learning\+\_\+rate is not positive. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented from \hyperlink{classneuralnet_1_1Layer_a24af23aba6bd257f90344d1c3d6d38b8}{neuralnet\+::\+Layer}.
+
+\mbox{\Hypertarget{classneuralnet_1_1SigmoidOutputLayer_ae5760686dccc5dc3ebd99e5bf7e7a0b0}\label{classneuralnet_1_1SigmoidOutputLayer_ae5760686dccc5dc3ebd99e5bf7e7a0b0}} 
+\index{neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}!Update\+Gpu@{Update\+Gpu}}
+\index{Update\+Gpu@{Update\+Gpu}!neuralnet\+::\+Sigmoid\+Output\+Layer@{neuralnet\+::\+Sigmoid\+Output\+Layer}}
+\subsubsection{\texorpdfstring{Update\+Gpu()}{UpdateGpu()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Sigmoid\+Output\+Layer\+::\+Update\+Gpu (\begin{DoxyParamCaption}\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Updates weights with momentum accumulated across forward-\/backward passes using gpu. 
+
+Weights are updated by substracting velocity multiplied by learning\+\_\+rate and divided by number of training samples from current weight.
+
+
+\begin{DoxyParams}{Parameters}
+{\em learning\+\_\+rate} & Speed with which this layer accepts new information. Pick this value carefully because if it\textquotesingle{}s too big layer can diverge, and if it\textquotesingle{}s too small it will take a long time to converge. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If learning\+\_\+rate is not positive. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented from \hyperlink{classneuralnet_1_1Layer_af7520597d321aae360329b70f9476073}{neuralnet\+::\+Layer}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/layers/sigmoid\+\_\+output\+\_\+layer.\+hpp\item 
+src/layers/sigmoid\+\_\+output\+\_\+layer.\+cpp\end{DoxyCompactItemize}

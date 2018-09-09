@@ -1,0 +1,99 @@
+\hypertarget{classneuralnet_1_1NetJsonIoHandler}{}\section{neuralnet\+:\+:Net\+Json\+Io\+Handler Class Reference}
+\label{classneuralnet_1_1NetJsonIoHandler}\index{neuralnet\+::\+Net\+Json\+Io\+Handler@{neuralnet\+::\+Net\+Json\+Io\+Handler}}
+
+
+Handler for importing/exporting \hyperlink{classneuralnet_1_1Net}{Net} to/from json format.  
+
+
+
+
+{\ttfamily \#include $<$net\+\_\+json\+\_\+io\+\_\+handler.\+hpp$>$}
+
+
+
+Inheritance diagram for neuralnet\+:\+:Net\+Json\+Io\+Handler\+:
+% FIG 0
+
+
+Collaboration diagram for neuralnet\+:\+:Net\+Json\+Io\+Handler\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classneuralnet_1_1NetJsonIoHandler_a0e8c0b44b686498867ce83835d5811c2}{Dump\+To\+File} (\hyperlink{classneuralnet_1_1Net}{Net} \&network, std\+::string file\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Saves information about a network to a json file. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1NetJsonIoHandler_af048bd4061be6b8e78d79b54680d9434}{Load\+From\+File} (\hyperlink{classneuralnet_1_1Net}{Net} \&network, std\+::string file\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Loads network data from a json file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Handler for importing/exporting \hyperlink{classneuralnet_1_1Net}{Net} to/from json format. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1NetJsonIoHandler_a0e8c0b44b686498867ce83835d5811c2}\label{classneuralnet_1_1NetJsonIoHandler_a0e8c0b44b686498867ce83835d5811c2}} 
+\index{neuralnet\+::\+Net\+Json\+Io\+Handler@{neuralnet\+::\+Net\+Json\+Io\+Handler}!Dump\+To\+File@{Dump\+To\+File}}
+\index{Dump\+To\+File@{Dump\+To\+File}!neuralnet\+::\+Net\+Json\+Io\+Handler@{neuralnet\+::\+Net\+Json\+Io\+Handler}}
+\subsubsection{\texorpdfstring{Dump\+To\+File()}{DumpToFile()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Net\+Json\+Io\+Handler\+::\+Dump\+To\+File (\begin{DoxyParamCaption}\item[{\hyperlink{classneuralnet_1_1Net}{Net} \&}]{network,  }\item[{std\+::string}]{file\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Saves information about a network to a json file. 
+
+Exports \hyperlink{classneuralnet_1_1Net}{Net} to json file in human readable format. File will contain following data\+: size of input layer, number of layers, types of layers, their sizes, numbers of inputs and weight matrices.
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & \hyperlink{classneuralnet_1_1Net}{Net} object which you want to export. \\
+\hline
+{\em file\+\_\+path} & Path to location where you want the file to be created followed by a file name without extension suffix. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em logic\+\_\+error} & If network is empty. \\
+\hline
+{\em runtime\+\_\+error} & If file couldn\textquotesingle{}t be created. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \hyperlink{classneuralnet_1_1NetIoHandler_a580e3b0768346da97ad40464cb62fe5c}{neuralnet\+::\+Net\+Io\+Handler}.
+
+\mbox{\Hypertarget{classneuralnet_1_1NetJsonIoHandler_af048bd4061be6b8e78d79b54680d9434}\label{classneuralnet_1_1NetJsonIoHandler_af048bd4061be6b8e78d79b54680d9434}} 
+\index{neuralnet\+::\+Net\+Json\+Io\+Handler@{neuralnet\+::\+Net\+Json\+Io\+Handler}!Load\+From\+File@{Load\+From\+File}}
+\index{Load\+From\+File@{Load\+From\+File}!neuralnet\+::\+Net\+Json\+Io\+Handler@{neuralnet\+::\+Net\+Json\+Io\+Handler}}
+\subsubsection{\texorpdfstring{Load\+From\+File()}{LoadFromFile()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Net\+Json\+Io\+Handler\+::\+Load\+From\+File (\begin{DoxyParamCaption}\item[{\hyperlink{classneuralnet_1_1Net}{Net} \&}]{network,  }\item[{std\+::string}]{file\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Loads network data from a json file. 
+
+Loads information about a network from json file and based on that data sets size of network input layer and adds appropriate layers and their weights. Types of layers handled by this funcion are\+: \hyperlink{classneuralnet_1_1ReLuLayer}{Re\+Lu\+Layer}, \hyperlink{classneuralnet_1_1SoftmaxOutputLayer}{Softmax\+Output\+Layer} and \hyperlink{classneuralnet_1_1SigmoidOutputLayer}{Sigmoid\+Output\+Layer}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & \hyperlink{classneuralnet_1_1Net}{Net} object to which you want to load architecture from file. \\
+\hline
+{\em file\+\_\+path} & Path to file containing network. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em logic\+\_\+error} & If network is not empty. \\
+\hline
+{\em runtime\+\_\+error} & If file couldn\textquotesingle{}t be opened. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \hyperlink{classneuralnet_1_1NetIoHandler_a9c6c5be1288e314c2affac7c939c52b5}{neuralnet\+::\+Net\+Io\+Handler}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/net\+\_\+json\+\_\+io\+\_\+handler.\+hpp\item 
+src/net\+\_\+json\+\_\+io\+\_\+handler.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['backprop',['BackProp',['../classneuralnet_1_1Layer.html#acb2410cfc113d819c545132c5df33102',1,'neuralnet::Layer::BackProp()'],['../classneuralnet_1_1Net.html#af6d95fdc4ccdc37d7150668fc74e8a36',1,'neuralnet::Net::BackProp()']]],
+  ['backpropcpu',['BackPropCpu',['../classneuralnet_1_1Layer.html#acb789462daab9227ff4ce6f7332bd38c',1,'neuralnet::Layer::BackPropCpu()'],['../classneuralnet_1_1ReLuLayer.html#a41da88c3eace20c2d8d2c397a9feb9d8',1,'neuralnet::ReLuLayer::BackPropCpu()'],['../classneuralnet_1_1SigmoidOutputLayer.html#a8020ad060ff1c3349bbf67ec3f3fccb8',1,'neuralnet::SigmoidOutputLayer::BackPropCpu()'],['../classneuralnet_1_1SoftmaxOutputLayer.html#a7360169d36832228b4938f9ff469bb59',1,'neuralnet::SoftmaxOutputLayer::BackPropCpu()']]],
+  ['backpropgpu',['BackPropGpu',['../classneuralnet_1_1Layer.html#aa81e9cfb0eaf5e17b38e011c4f56f042',1,'neuralnet::Layer::BackPropGpu()'],['../classneuralnet_1_1ReLuLayer.html#aafc499ba5e1de303b447ad1abb26f914',1,'neuralnet::ReLuLayer::BackPropGpu()'],['../classneuralnet_1_1SigmoidOutputLayer.html#a0e9397124e10c8be7a7f587982e7c948',1,'neuralnet::SigmoidOutputLayer::BackPropGpu()'],['../classneuralnet_1_1SoftmaxOutputLayer.html#af3308eebc5a7acc982f4ac0b55d34fc3',1,'neuralnet::SoftmaxOutputLayer::BackPropGpu()']]]
+];

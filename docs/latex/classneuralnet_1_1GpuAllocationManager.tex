@@ -1,0 +1,109 @@
+\hypertarget{classneuralnet_1_1GpuAllocationManager}{}\section{neuralnet\+:\+:Gpu\+Allocation\+Manager Class Reference}
+\label{classneuralnet_1_1GpuAllocationManager}\index{neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}}
+
+
+Wrapper around cuda\+Malloc() and cuda\+Free() tracking unfreed device memory allocations.  
+
+
+
+
+{\ttfamily \#include $<$gpu\+\_\+allocation\+\_\+manager.\+hpp$>$}
+
+
+
+Inheritance diagram for neuralnet\+:\+:Gpu\+Allocation\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for neuralnet\+:\+:Gpu\+Allocation\+Manager\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classneuralnet_1_1GpuAllocationManager_a005583fd4e67bd57870d30d1ed5b9f5c}\label{classneuralnet_1_1GpuAllocationManager_a005583fd4e67bd57870d30d1ed5b9f5c}} 
+long long \hyperlink{classneuralnet_1_1GpuAllocationManager_a005583fd4e67bd57870d30d1ed5b9f5c}{Get\+Last\+Allocation\+Id} ()
+\begin{DoxyCompactList}\small\item\em Returns id of most recent allocation or -\/1 if no allocations were made. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{classneuralnet_1_1GpuAllocationManager_ac5326b5c0b3cfe942583a2d9e858912b}{Allocate\+Device} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Allocates size\+\_\+t bytes on gpu device. \end{DoxyCompactList}\item 
+void \hyperlink{classneuralnet_1_1GpuAllocationManager_a24bbbc0e44887a00679b04527fee7b4a}{Free\+Device} (void $\ast$d\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Frees device memory block. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classneuralnet_1_1GpuAllocationManager_ab69d8bcac9451715968bd0c9326f5031}\label{classneuralnet_1_1GpuAllocationManager_ab69d8bcac9451715968bd0c9326f5031}} 
+void \hyperlink{classneuralnet_1_1GpuAllocationManager_ab69d8bcac9451715968bd0c9326f5031}{Print\+Allocation\+State} ()
+\begin{DoxyCompactList}\small\item\em Prints out unfreed allocations ids. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static long long \hyperlink{classneuralnet_1_1GpuAllocationManager_a5af99716544aa62af9d223f134178324}{allocation\+\_\+id\+\_\+} = 0
+\item 
+static std\+::unordered\+\_\+set$<$ long long $>$ \hyperlink{classneuralnet_1_1GpuAllocationManager_a8551c1a8fa5e6628e3db91f3724b71c9}{allocated\+\_\+set\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Wrapper around cuda\+Malloc() and cuda\+Free() tracking unfreed device memory allocations. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1GpuAllocationManager_ac5326b5c0b3cfe942583a2d9e858912b}\label{classneuralnet_1_1GpuAllocationManager_ac5326b5c0b3cfe942583a2d9e858912b}} 
+\index{neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}!Allocate\+Device@{Allocate\+Device}}
+\index{Allocate\+Device@{Allocate\+Device}!neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}}
+\subsubsection{\texorpdfstring{Allocate\+Device()}{AllocateDevice()}}
+{\footnotesize\ttfamily void $\ast$ neuralnet\+::\+Gpu\+Allocation\+Manager\+::\+Allocate\+Device (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Allocates size\+\_\+t bytes on gpu device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & Number of bytes to allocate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to allocated device memory block. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & If allocation failed. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classneuralnet_1_1GpuAllocationManager_a24bbbc0e44887a00679b04527fee7b4a}\label{classneuralnet_1_1GpuAllocationManager_a24bbbc0e44887a00679b04527fee7b4a}} 
+\index{neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}!Free\+Device@{Free\+Device}}
+\index{Free\+Device@{Free\+Device}!neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}}
+\subsubsection{\texorpdfstring{Free\+Device()}{FreeDevice()}}
+{\footnotesize\ttfamily void neuralnet\+::\+Gpu\+Allocation\+Manager\+::\+Free\+Device (\begin{DoxyParamCaption}\item[{void $\ast$}]{d\+\_\+ptr }\end{DoxyParamCaption})}
+
+
+
+Frees device memory block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d\+\_\+ptr} & Pointer to the beggining of device memory block you want to free. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & If freeing device memory failed. \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classneuralnet_1_1GpuAllocationManager_a8551c1a8fa5e6628e3db91f3724b71c9}\label{classneuralnet_1_1GpuAllocationManager_a8551c1a8fa5e6628e3db91f3724b71c9}} 
+\index{neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}!allocated\+\_\+set\+\_\+@{allocated\+\_\+set\+\_\+}}
+\index{allocated\+\_\+set\+\_\+@{allocated\+\_\+set\+\_\+}!neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}}
+\subsubsection{\texorpdfstring{allocated\+\_\+set\+\_\+}{allocated\_set\_}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ long long $>$ neuralnet\+::\+Gpu\+Allocation\+Manager\+::allocated\+\_\+set\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Set containing ids of unfreed device memory blocks. \mbox{\Hypertarget{classneuralnet_1_1GpuAllocationManager_a5af99716544aa62af9d223f134178324}\label{classneuralnet_1_1GpuAllocationManager_a5af99716544aa62af9d223f134178324}} 
+\index{neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}!allocation\+\_\+id\+\_\+@{allocation\+\_\+id\+\_\+}}
+\index{allocation\+\_\+id\+\_\+@{allocation\+\_\+id\+\_\+}!neuralnet\+::\+Gpu\+Allocation\+Manager@{neuralnet\+::\+Gpu\+Allocation\+Manager}}
+\subsubsection{\texorpdfstring{allocation\+\_\+id\+\_\+}{allocation\_id\_}}
+{\footnotesize\ttfamily long long neuralnet\+::\+Gpu\+Allocation\+Manager\+::allocation\+\_\+id\+\_\+ = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+Id of the next allocation. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/gpu\+\_\+allocation\+\_\+manager.\+hpp\item 
+src/gpu\+\_\+allocation\+\_\+manager.\+cpp\end{DoxyCompactItemize}
