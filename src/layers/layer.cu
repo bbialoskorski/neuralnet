@@ -56,6 +56,7 @@ __global__ void compute_velocity_kernel(double* __restrict__ d_velocity,
   // dE/d(w[row][col]) which is the gradient we're looking for.
   __shared__ double shared_errors[TTileDim];
   __shared__ double shared_prev_layer_output[TTileDim];
+
   int x = threadIdx.x;
   int y = threadIdx.y;
   int global_x = blockIdx.x * TTileDim + x;

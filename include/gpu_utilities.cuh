@@ -76,29 +76,35 @@ __global__ void matrix_vector_mult_kernel(TType* __restrict__ d_out_vector,
     // Padding extra shared memory.
     shared_mem[tid] = 0;
   }
+
   __syncthreads();
+
   // Performing unrolled sum reduction on shared memory inside this block.
   if (TBlockSize >= 1024) {
     if (tid < 512)
       shared_mem[tid] += shared_mem[tid + 512];
+
     __syncthreads();
   }
 
   if (TBlockSize >= 512) {
     if (tid < 256)
       shared_mem[tid] += shared_mem[tid + 256];
+
     __syncthreads();
   }
 
   if (TBlockSize >= 256) {
     if (tid < 128)
       shared_mem[tid] += shared_mem[tid + 128];
+
     __syncthreads();
   }
 
   if (TBlockSize >= 128) {
     if (tid < 64)
       shared_mem[tid] += shared_mem[tid + 64];
+
     __syncthreads();
   }
 
@@ -133,30 +139,35 @@ __global__ void vector_sum_kernel(TType* d_out, TType* d_in, int size) {
     shared_mem[tid] += d_in[grid_tid] + d_in[grid_tid + TBlockSize];
     grid_tid += grid_size;
   }
+
   __syncthreads();
 
   // Performing unrolled sum reduction on shared memory inside this block.
   if (TBlockSize >= 1024) {
     if (tid < 512)
       shared_mem[tid] += shared_mem[tid + 512];
+
     __syncthreads();
   }
 
   if (TBlockSize >= 512) {
     if (tid < 256)
       shared_mem[tid] += shared_mem[tid + 256];
+
     __syncthreads();
   }
 
   if (TBlockSize >= 256) {
     if (tid < 128)
       shared_mem[tid] += shared_mem[tid + 128];
+
     __syncthreads();
   }
 
   if (TBlockSize >= 128) {
     if (tid < 64)
       shared_mem[tid] += shared_mem[tid + 64];
+
     __syncthreads();
   }
 
@@ -188,6 +199,7 @@ __global__ void vector_max_kernel(TType* d_out, TType* d_in, int size) {
   shared_mem[tid] = d_in[grid_tid];
   while (grid_tid < size) {
     TType tmp = d_in[grid_tid + TBlockSize];
+
     if (shared_mem[tid] < tmp) shared_mem[tid] = tmp;
     grid_tid += grid_size;
   }
@@ -199,6 +211,7 @@ __global__ void vector_max_kernel(TType* d_out, TType* d_in, int size) {
     if (tid < 512)
       if (shared_mem[tid] < shared_mem[tid + 512])
         shared_mem[tid] = shared_mem[tid + 512];
+
     __syncthreads();
   }
 
@@ -206,6 +219,7 @@ __global__ void vector_max_kernel(TType* d_out, TType* d_in, int size) {
     if (tid < 256)
       if (shared_mem[tid] < shared_mem[tid + 256])
         shared_mem[tid] = shared_mem[tid + 256];
+
     __syncthreads();
   }
 
@@ -213,6 +227,7 @@ __global__ void vector_max_kernel(TType* d_out, TType* d_in, int size) {
     if (tid < 128)
       if (shared_mem[tid] < shared_mem[tid + 128])
         shared_mem[tid] = shared_mem[tid + 128];
+
     __syncthreads();
   }
 
@@ -220,6 +235,7 @@ __global__ void vector_max_kernel(TType* d_out, TType* d_in, int size) {
     if (tid < 64)
       if (shared_mem[tid] < shared_mem[tid + 64])
         shared_mem[tid] = shared_mem[tid + 64];
+
     __syncthreads();
   }
 
