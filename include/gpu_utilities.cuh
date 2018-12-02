@@ -191,6 +191,7 @@ __global__ void vector_max_kernel(TType* d_out, TType* d_in, int size) {
     if (shared_mem[tid] < tmp) shared_mem[tid] = tmp;
     grid_tid += grid_size;
   }
+
   __syncthreads();
 
   // Performing unrolled max reduction on shared memory inside this block.
@@ -266,6 +267,7 @@ __global__ void transpose_matrix_kernel(TType* d_out, TType* d_in,
     // Writing data to shared memory in transpose fashion.
     shared_mem[y][x] = d_in[(top_left_y + y) * num_cols + top_left_x + x];
   }
+
   __syncthreads();
 
   if (transpose_top_lefy_y + y < num_cols && transpose_top_left_x + x < num_rows) {
@@ -293,10 +295,12 @@ __global__ void matrix_mult_kernel(TType* __restrict__ d_out,
   // Padding shared memory.
   a_shared[x][y] = 0;
   b_shared[x][y] = 0;
+
   __syncthreads();
 
   TType dot_product = 0;
   int block_offset = 0;
+
   while (block_offset * TTileDim < num_cols_a) {
     // Loading corresponding elements of A to shared memory.
     if (global_y < num_rows_a && block_offset * TTileDim + x < num_cols_a) {
@@ -309,7 +313,9 @@ __global__ void matrix_mult_kernel(TType* __restrict__ d_out,
       b_shared[x][y] =
           d_in_b[global_x + num_cols_b * (block_offset * TTileDim + y)];
     }
+
     ++block_offset;
+
     __syncthreads();
 
     // Performing multiplication of corresponding tiles of A and B.
