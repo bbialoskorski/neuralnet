@@ -60,6 +60,7 @@ void Layer::Reshape(int num_inputs, int num_neurons) {
 
   num_inputs_ = num_inputs + 1;
   num_neurons_ = num_neurons;
+
   weights_.resize(num_neurons_ * num_inputs_);
   velocity_.resize(num_neurons_ * num_inputs_);
   velocity_.assign(velocity_.size(), 0.0);
@@ -132,12 +133,15 @@ void Layer::ComputeActivationCpu(const std::vector<double>& input) {
 }
 
 void Layer::ComputeWeightedErrorCpu() {
+  int tile_dim =
+      64 / sizeof(double);  // 64 bytes is most common cache line size.
   int mini_batch_size = error_.size() / num_neurons_;
   // Resizing weighted_error to fit size of current mini batch.
   weighted_error_.resize((num_inputs_ - 1) * mini_batch_size);
   weighted_error_.assign(weighted_error_.size(), 0.0);
+
   std::vector<double> transposed_weights(weights_.size());
-  int tile_dim = 64 / sizeof(double);
+
 #pragma omp parallel
   {
 // Transposing weights matrix.
@@ -224,6 +228,7 @@ void Layer::ComputeVelocityCpu(const std::vector<double>& prev_layer_output,
     int col = i - row * num_inputs_;
     // Calculating gradient on the current mini-batch.
     double gradient = 0.0;
+
     for (int batch_index = 0; batch_index < mini_batch_size; ++batch_index) {
       if (col != num_inputs_ - 1) {
         gradient += error_[row * mini_batch_size + batch_index] *

@@ -36,6 +36,7 @@ __global__ void rectifier_kernel(double* d_output, double* d_activation,
                                  int num_inputs) {
   // R(x) = max(0, x)
   int tid = threadIdx.x + blockIdx.x * blockDim.x;
+
   if (tid < num_inputs) {
     double activation = d_activation[tid];
     d_output[tid] = activation > 0.0 ? activation : 0.0;
@@ -57,6 +58,7 @@ void ReLuLayer::ForwardPropGpu(const std::vector<double>& input) {
       num_neurons_ * mini_batch_size * sizeof(double));
   double* d_output = (double*)manager.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
+
   // Resizing output and activation to fit size of current mini-batch.
   output_.resize(num_neurons_ * mini_batch_size);
   activation_.resize(num_neurons_ * mini_batch_size);

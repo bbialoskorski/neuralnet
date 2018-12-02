@@ -34,11 +34,13 @@ namespace neuralnet {
 
 void NetJsonIoHandler::DumpToFile(Net& network, std::string file_path) {
   std::vector<std::shared_ptr<Layer>> layers = GetLayers(network);
+
   if (layers.empty()) throw std::logic_error("Dump called on empty network.");
   // Creating json representation of the network.
   nlohmann::json net_json;
   net_json["NetworkInfo"]["NumInputs"] = network.GetNumInputs();
   net_json["NetworkInfo"]["NumLayers"] = network.GetNumLayers();
+
   for (int i = 0; i < network.GetNumLayers(); ++i) {
     std::string key = "Layer_" + std::to_string(i);
     net_json[key]["LayerType"] = layers[i]->GetLayerType();
@@ -46,7 +48,9 @@ void NetJsonIoHandler::DumpToFile(Net& network, std::string file_path) {
     net_json[key]["NumInputs"] = layers[i]->GetNumInputs();
     net_json[key]["Weights"] = layers[i]->GetWeights();
   }
+
   std::ofstream file_stream(file_path + ".json");
+
   if (file_stream.is_open()) {
     file_stream << std::setw(4) << net_json << std::endl;
     file_stream.close();
@@ -73,10 +77,12 @@ void NetJsonIoHandler::LoadFromFile(Net& network, std::string file_path) {
   int num_inputs = net_json["NetworkInfo"]["NumInputs"];
   int num_layers = net_json["NetworkInfo"]["NumLayers"];
   SetInputLayerSize(network, num_inputs);
+
   for (int i = 0; i < num_layers; ++i) {
     std::string key = "Layer_" + std::to_string(i);
     int num_neurons = net_json[key]["NumNeurons"];
     std::string layer_type = net_json[key]["LayerType"];
+
     if (layer_type == "ReLuLayer") {
       std::shared_ptr<Layer> new_layer = std::make_shared<ReLuLayer>();
       network.AddLayer(new_layer, num_neurons);

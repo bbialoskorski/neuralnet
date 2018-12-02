@@ -188,6 +188,7 @@ void SigmoidOutputLayer::BackPropGpu(
 
   dim3 grid(std::ceil((float)error_.size() / (float)kBlockSize));
   dim3 block(kBlockSize);
+
   compute_mean_squared_error_derivative_kernel<<<grid, block>>>(
       d_error, d_output, d_target_output, error_.size());
   

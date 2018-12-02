@@ -43,14 +43,17 @@ void NetworkTrainer::Train(
 
   for (int epoch = 0; epoch < num_epochs; epoch++) {
     double loss = 0.0;
+
     for (int mini_batch = 0; mini_batch < inputs.size(); ++mini_batch) {
       neural_network_.ForwardProp(inputs[mini_batch]);
       neural_network_.BackProp(target_outputs[mini_batch], momentum);
       loss += neural_network_.GetLoss(target_outputs[mini_batch]);
       neural_network_.Update(learning_rate);
     }
+
     std::cout << "Epoch " << epoch << " out of " << num_epochs
               << " completed. Loss: " << loss << std::endl;
+
     neural_network_.ResetVelocity();
   }
 
@@ -58,13 +61,15 @@ void NetworkTrainer::Train(
   int input_size = neural_network_.GetNumInputs();
   std::for_each(inputs.begin(), inputs.end(),
                 [&num_samples, input_size](std::vector<double> in) {
-                  num_samples += in.size() / input_size; });
+                  num_samples += in.size() / input_size;
+                });
+
   std::chrono::high_resolution_clock::time_point finish_time =
       std::chrono::high_resolution_clock::now();
+
   std::cout << "Network training complete! " << num_epochs
             << " epochs elapsed with learning rate " << learning_rate << " on "
-            << num_samples
-            << " training samples in "
+            << num_samples << " training samples in "
             << std::chrono::duration_cast<std::chrono::seconds>(finish_time -
                                                                 start_time)
                    .count()
@@ -76,23 +81,29 @@ void NetworkTrainer::Test(const std::vector<std::vector<double>>& inputs,
   int input_size = neural_network_.GetNumInputs();
   int batch_size = inputs[0].size() / input_size;
   int correct_count = 0;
+
   std::vector<double> output;
+
   for (int input_index = 0; input_index < inputs.size(); ++input_index) {
     output = neural_network_.ForwardProp(inputs[input_index]);
     int num_rows = output.size() / batch_size;
+
     for (int col = 0; col < batch_size; ++col) {
       double max_val = output[col];
       int max_row = 0;
+
       for (int row = 0; row < num_rows; ++row) {
         if (output[row * batch_size + col] > max_val) {
           max_val = output[row * batch_size + col];
           max_row = row;
         }
       }
+
       if (labels[input_index][max_row * batch_size + col] == 1.0)
         ++correct_count;
     }
   }
+
   std::cout << std::endl;
   std::cout << "Network achieved "
             << ((double)correct_count /

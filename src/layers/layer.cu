@@ -60,22 +60,28 @@ __global__ void compute_velocity_kernel(double* __restrict__ d_velocity,
   int y = threadIdx.y;
   int global_x = blockIdx.x * TTileDim + x;
   int global_y = blockIdx.y * TTileDim + y;
+
   if (global_x < num_inputs && global_y < num_neurons) {
     // Calculating gradient on the current mini-batch.
     double gradient = 0.0;
+
     for (int batch_column = 0; batch_column < mini_batch_size; ++batch_column) {
+
       if (x == 0) {
         // Threads in the first column of a tile are loading layer's error to
         // shared memory.
         shared_errors[y] = d_error[global_y * mini_batch_size + batch_column];
       }
+
       if (y == 0) {
         // Threads in the first row of a tile are loading output from previous
         // layer in a forward pass to shared memory.
         shared_prev_layer_output[x] =
             d_prev_layer_output[global_x * mini_batch_size + batch_column];
       }
+
       __syncthreads();
+
       if (global_x != num_inputs - 1) {
         gradient += shared_errors[y] * shared_prev_layer_output[x];
       }
@@ -83,7 +89,9 @@ __global__ void compute_velocity_kernel(double* __restrict__ d_velocity,
         // Bias input weight.
         gradient += shared_errors[y];
       }
+
       __syncthreads();
+
     }
     // Momentum backpropagation:
     // velocity(t) = momentum * velocity(t - 1) + (1.0 - momentum) * dE/dW,
@@ -159,11 +167,13 @@ void Layer::ComputeActivationGpu(double* d_activation,
                           + ") occured while copying weights data to device.";
     throw std::runtime_error(err_msg);
   }
+
   if (mini_batch_size == 1) {
     // Input is a vector, using specialized multiplication function for
     // performance.
     dim3 grid(std::ceil((float)num_inputs_ / (float)kBlockSize)*num_neurons_);
     dim3 block(kBlockSize);
+
     matrix_vector_mult_kernel<double, kBlockSize><<<grid, block>>>(
         d_activation, d_weights, d_input, num_neurons_, num_inputs_);
   }
@@ -172,6 +182,7 @@ void Layer::ComputeActivationGpu(double* d_activation,
     dim3 grid(std::ceil((float)mini_batch_size / (float)kTileDim),
               std::ceil((float)num_neurons_ / (float)kTileDim));
     dim3 tile(kTileDim, kTileDim);
+
     matrix_mult_kernel<double, kTileDim><<<grid, tile>>>(
         d_activation, d_weights, d_input, num_neurons_, num_inputs_,
         mini_batch_size);
@@ -190,6 +201,7 @@ void Layer::ComputeWeightedErrorGpu(double* d_weighted_error,
   dim3 transpose_grid(std::ceil((float)num_inputs_ / (float)kTileDim),
                       std::ceil((float)num_neurons_ / (float)kTileDim));
   dim3 tile(kTileDim, kTileDim);
+
   transpose_matrix_kernel<double, kTileDim><<<transpose_grid, tile>>>(
       d_weights, d_weights, num_neurons_, num_inputs_);
   // While multiplying matrices we will not be using d_weights corresponging to
@@ -202,6 +214,7 @@ void Layer::ComputeWeightedErrorGpu(double* d_weighted_error,
     dim3 grid(
         std::ceil((float)num_neurons_ / (float)kBlockSize) * (num_inputs_ - 1));
     dim3 block(kBlockSize);
+
     matrix_vector_mult_kernel<double, kBlockSize><<<grid, block>>>(
         d_weighted_error, d_weights, d_error, num_inputs_ - 1,
         num_neurons_);
@@ -210,6 +223,7 @@ void Layer::ComputeWeightedErrorGpu(double* d_weighted_error,
     // Error is a matrix.
     dim3 grid(std::ceil((float)mini_batch_size / (float)kTileDim),
               std::ceil((float)(num_inputs_ - 1) / (float)kTileDim));
+
     matrix_mult_kernel<double, kTileDim><<<grid, tile>>>(d_weighted_error,
         d_weights, d_error, num_inputs_ - 1, num_neurons_, mini_batch_size);
   }
@@ -226,6 +240,7 @@ void Layer::ComputeVelocityGpu(double* d_velocity, const double* d_error,
   dim3 grid(std::ceil((float)num_inputs_ / (float)kTileDim),
             std::ceil((float)num_neurons_ / (float)kTileDim));
   dim3 tile(kTileDim, kTileDim);
+
   compute_velocity_kernel<kTileDim><<<grid, tile>>>(d_velocity, d_error,
                                                     d_prev_layer_output,
                                                     num_neurons_, num_inputs_,

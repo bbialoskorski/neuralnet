@@ -42,6 +42,7 @@ void* GpuAllocationManager::AllocateDevice(size_t size) {
   void* d_ptr;
   cudaError_t cuda_status;
   cuda_status = cudaMalloc(&d_ptr, size + sizeof(long long));
+
   if (cuda_status != cudaSuccess) {
     std::string err_msg =
         "Error (" + std::string(cudaGetErrorString(cuda_status)) +
@@ -49,16 +50,20 @@ void* GpuAllocationManager::AllocateDevice(size_t size) {
         std::to_string(id) + ")";
     throw std::runtime_error(err_msg);
   }
+
   cuda_status =
       cudaMemcpy(d_ptr, &id, sizeof(long long), cudaMemcpyHostToDevice);
+
   if (cuda_status != cudaSuccess) {
     std::string err_msg =
         "Error (" + std::string(cudaGetErrorString(cuda_status)) +
         ") occured while trying to copy allocation id to allocated block \
 (allocation id " +
         std::to_string(id) + ")";
+
     throw std::runtime_error(err_msg);
   }
+
   return (char*)d_ptr + sizeof(long long);
 }
 
@@ -67,6 +72,7 @@ void GpuAllocationManager::FreeDevice(void* d_ptr) {
   cudaError_t cuda_status;
   cuda_status = cudaMemcpy(&id, (char*)d_ptr - sizeof(long long),
                            sizeof(long long), cudaMemcpyDeviceToHost);
+
   if (cuda_status != cudaSuccess) {
     std::string err_msg =
         "Error (" + std::string(cudaGetErrorString(cuda_status)) +
@@ -74,14 +80,18 @@ void GpuAllocationManager::FreeDevice(void* d_ptr) {
 pointer.";
     throw std::runtime_error(err_msg);
   }
+
   cuda_status = cudaFree((char*)d_ptr - sizeof(long long));
+
   if (cuda_status != cudaSuccess) {
     std::string err_msg =
         "Error (" + std::string(cudaGetErrorString(cuda_status)) +
         ") occured while trying to free memory from device (allocation id " +
         std::to_string(id) + ")";
+
     throw std::runtime_error(err_msg);
   }
+
   allocated_set_.erase(id);
 }
 

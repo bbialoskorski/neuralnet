@@ -36,6 +36,7 @@ void ReLuLayer::InitializeWeights() {
   std::default_random_engine generator;
   std::normal_distribution<double> distribution(
       0.0, sqrt(2.0 / (double)num_inputs_));
+
   for (double& weight : weights_) weight = distribution(generator);
 }
 

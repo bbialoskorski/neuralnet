@@ -45,6 +45,7 @@ void SoftmaxOutputLayer::ForwardPropGpu(const std::vector<double>& input) {
   int mini_batch_size = input.size() / (num_inputs_ - 1);
   double* d_activation = (double*)manager.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
+
   // Resizing activation to fit size of current mini batch.
   activation_.resize(num_neurons_ * mini_batch_size);
 

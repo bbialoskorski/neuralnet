@@ -60,11 +60,14 @@ void Net::AddLayer(std::shared_ptr<Layer> layer, int num_neurons) {
 
   int num_inputs =
       layers_.empty() ? input_layer_size_ : layers_.back()->GetSize();
+
   layer->Initialize(num_inputs, num_neurons);
+
   if (gpu_flag_)
     layer->SetGpuFlag();
   else
     layer->ClearGpuFlag();
+
   layers_.push_back(layer);
 }
 
@@ -75,11 +78,14 @@ void Net::AddLayer(std::shared_ptr<Layer> layer, int num_neurons,
 
   int num_inputs =
       layers_.empty() ? input_layer_size_ : layers_.back()->GetSize();
+
   layer->Initialize(num_inputs, num_neurons, init_strategy);
+
   if (gpu_flag_)
     layer->SetGpuFlag();
   else
     layer->ClearGpuFlag();
+
   layers_.push_back(layer);
 }
 
@@ -102,13 +108,17 @@ std::vector<double> Net::ForwardProp(const std::vector<double>& input) {
     throw std::logic_error("Error: attempt to ForwardProp on empty network.");
 
   std::vector<double> output = input;
+
   output_.push_back(input);
+
   for (auto layer_itr = layers_.begin(); layer_itr != std::prev(layers_.end());
        ++layer_itr) {
     output = (*layer_itr).get()->ForwardProp(output);
     output_.push_back(output);
   }
+
   output = layers_.back()->ForwardProp(output);
+
   return output;
 }
 
@@ -116,6 +126,7 @@ void Net::BackProp(const std::vector<double>& target_output, double momentum) {
   if (layers_.size() == 0) {
     throw std::logic_error("Error: attempt to BackProp on empty network.");
   }
+
   if (momentum <= 0 || momentum >= 1)
     throw std::invalid_argument(
         "momentum coefficient should have a value\
@@ -127,6 +138,7 @@ void Net::BackProp(const std::vector<double>& target_output, double momentum) {
     backprop_vector = layers_[layer_index]->BackProp(
         backprop_vector, output_[layer_index], momentum);
   }
+
   output_.erase(output_.begin(), output_.end());
 }
 

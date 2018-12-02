@@ -121,7 +121,9 @@ void SigmoidOutputLayer::ComputeErrorCpu(
   // y'[row]: output of neuron row in current layer
   // y[row]: expected output for neuron row in current layer.
   int batch_size = target_output.size() / num_neurons_;
+
   error_.resize(num_neurons_ * batch_size);
+
 #pragma omp parallel for
   for (int i = 0; i < error_.size(); ++i) {
     double difference = output_[i] - target_output[i];
@@ -132,8 +134,10 @@ void SigmoidOutputLayer::ComputeErrorCpu(
 double SigmoidOutputLayer::GetLoss(const std::vector<double>& target_output) {
   double loss = 0.0;
   int batch_size = target_output.size() / num_neurons_;
+
   for (int i = 0; i < output_.size(); ++i)
     loss += std::pow(output_[i] - target_output[i], 2.0) / batch_size;
+
   return loss;
 }
 

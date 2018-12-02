@@ -45,21 +45,27 @@ void SoftmaxOutputLayer::StableSoftmax() {
 #pragma omp parallel for
   for (int column = 0; column < mini_batch_size; ++column) {
     double max_activation = std::numeric_limits<double>::lowest();
+
     for (int row = 0; row < num_neurons_; ++row) {
       double val = activation_[row * mini_batch_size + column];
+
       if (val > max_activation) {
         max_activation = val;
       }
     }
+
     double exponents_sum = 0.0;
+
     for (int row = 0; row < num_neurons_; ++row) {
       // Squishing activations so their exponents don't overflow by
       // substracting max activation from each argument.
       double exponent = std::exp(activation_[row * mini_batch_size + column] -
                                  max_activation);
+
       output_[row * mini_batch_size + column] = exponent;
       exponents_sum += exponent;
     }
+
     for (int row = 0; row < num_neurons_; ++row) {
       // Computing softmax function values according to following formula:
       // f(x[i]) = exp(x[i]) / sum(exp(x)) where x is an arguments column
@@ -78,7 +84,9 @@ void SoftmaxOutputLayer::ForwardPropCpu(const std::vector<double>& input) {
 void SoftmaxOutputLayer::CrossEntropyDerivative(
     const std::vector<double>& target_outputs) {
   int batch_size = target_outputs.size() / num_neurons_;
+
   error_.resize(num_neurons_ * batch_size);
+
 #pragma omp parallel
   for (int index = 0; index < output_.size(); ++index)
     error_[index] = output_[index] - target_outputs[index];
