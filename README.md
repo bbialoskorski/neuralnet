@@ -1,7 +1,7 @@
 # neuralnet
-**neuralnet** is a c++ library for implementation of feedforward neural networks developed for educational purposes. For learning process of networks this project uses a variant of backpropagation algorithm called a mini-batch gradient descent with momentum. I've created two implementations for forward, backward propagation and updates: on GPU using CUDA and on CPU using OpenMP. I've tested network's ability to learn by training it on MNIST handwritten digits [data set](http://yann.lecun.com/exdb/mnist/) containing 60000 28x28 grayscale pictures for 10 epochs with 0.01 learning rate and 0.9 momentum coefficient. Network's topology was 784 neuron input layer, 800 neuron hidden layer with ReLu activation, and 10 neuron output layer using softmax activation function with cross entropy loss function. My network achieved **~98% accuracy** on test data set containing 10000 samples not used in training. **Training completed almost 19 times faster when using gpu implementation vs cpu one.** Net was trained on Nvidia GTX 1050, Intel i7-3820 machine.
+**neuralnet** is a c++ library for implementation of feedforward neural networks developed for educational purposes. For learning process of networks this project uses a variant of backpropagation algorithm called a mini-batch gradient descent with momentum. I've created two implementations for forward, backward propagation and updates: on GPU using CUDA and on CPU using OpenMP. I've tested network's ability to learn by training it on MNIST handwritten digits [data set](http://yann.lecun.com/exdb/mnist/) containing 60000 28x28 grayscale pictures for 10 epochs with 0.01 learning rate and 0.9 momentum coefficient. Network's topology was 784 neuron input layer, 800 neuron hidden layer with ReLu activation, and 10 neuron output layer using softmax activation function with cross entropy loss function. My network achieved **~98% accuracy** on test data set containing 10000 samples not used in training. **Achieved 19x speed up in training time when using gpu implementation vs cpu one.** Net was trained on Nvidia GTX 1050, Intel i7-3820 machine.
 
-This project includes documentation that can be found [here](https://bbialoskorski.github.io/neuralnet/).
+This project includes documentation that can be found [here](https://bbialoskorski.github.io/neuralnet/annotated.html).
 
 ### Goals for this project:
 * Learn about feedforward neural networks.
@@ -19,7 +19,7 @@ This project includes documentation that can be found [here](https://bbialoskors
 * Sigmoid Output Layer
 
 ### Example:
-Let's build our network. First argument of the constructor is the size of the input layer and second argument is a bool setting whether gpu implementation will be used.
+Let's build our network. First argument to the constructor is the size of the input layer and second argument is a bool setting whether gpu implementation will be used.
 ```c++
 // Input layer size is 784 because each image in MNIST data set is 28x28
 // pixels.
@@ -45,16 +45,16 @@ std::vector<std::vector<double>> labels = LoadTrainingLabels();
 
 std::cout << "Training data ready!" << std::endl;
 ```
-We can train the network by creating a NetworkTrainer object and passing our network in a constructor and then calling Train function of this object.
+We can train the network by creating a NetworkTrainer object and passing our network to the constructor and then calling Train function of this object.
 ```c++
 neuralnet::NetworkTrainer net_trainer(network);
 // Training the network for 10 epochs using learning rate 0.01 and momentum
 // coefficient 0.9.
 net_trainer.Train(inputs, labels, 0.01, 0.9, 10);
 ```
-Training on gpu gave the following output:
+Training on gpu resulted in the following output:
 ![](https://i.imgur.com/utKvO8N.png)
-whereas training on cpu resulted with this output:
+whereas training on cpu resulted in this output:
 ![](https://i.imgur.com/rARRkNp.png)
 
 **Gpu implementation ran almost 19 times faster!**
@@ -83,7 +83,7 @@ std::cout << "Test data ready!" << std::endl;
 neuralnet::NetworkTrainer net_trainer(network);
 net_trainer.Test(inputs, labels);
 ```
-Which resulted with the following output for network trained using gpu:
+Which resulted in the following output for network trained using gpu:
 ![](https://i.imgur.com/G4Gyvwg.png)
 
 And this output for network trained using cpu:
