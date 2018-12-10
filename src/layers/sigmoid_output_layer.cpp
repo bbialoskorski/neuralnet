@@ -63,8 +63,10 @@ void SigmoidOutputLayer::InitializeWeights() {
 void SigmoidOutputLayer::ForwardPropCpu(const std::vector<double>& input) {
   ComputeActivationCpu(input);
   int mini_batch_size = input.size() / (num_inputs_ - 1);
+
   // Resizing output to fit size of current mini-batch.
   output_.resize(num_neurons_ * mini_batch_size);
+
   // Calculating sigmoid function value for each activation.
   // S(x) = 1 / (1 + exp(-x))
 #pragma omp parallel for

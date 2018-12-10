@@ -59,6 +59,7 @@ void NetworkTrainer::Train(
 
   int num_samples = 0;
   int input_size = neural_network_.GetNumInputs();
+
   std::for_each(inputs.begin(), inputs.end(),
                 [&num_samples, input_size](std::vector<double> in) {
                   num_samples += in.size() / input_size;

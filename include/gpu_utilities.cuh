@@ -65,6 +65,7 @@ __global__ void matrix_vector_mult_kernel(TType* __restrict__ d_out_vector,
                         * TBlockSize;
   int row = grid_tid / threads_per_row;
   int column = grid_tid - row * threads_per_row;
+
   // Discarding extra threads from a block that would otherwise operate on
   // elements from two different rows of the input matrix.
   if (column < num_columns) {
@@ -181,6 +182,7 @@ __global__ void vector_sum_kernel(TType* d_out, TType* d_in, int size) {
     if (TBlockSize >= 4) shared_mem[tid] += shared_mem[tid + 2];
     if (TBlockSize >= 2) shared_mem[tid] += shared_mem[tid + 1];
   }
+
   // Writing result to output array.
   if (tid == 0)
     d_out[blockIdx.x] = shared_mem[0];
@@ -261,6 +263,7 @@ __global__ void vector_max_kernel(TType* d_out, TType* d_in, int size) {
       if (shared_mem[tid] < shared_mem[tid + 1])
         shared_mem[tid] = shared_mem[tid + 1];
   }
+
   // Writing result to output array.
   if (tid == 0)
     d_out[blockIdx.x] = shared_mem[0];
@@ -323,6 +326,7 @@ __global__ void matrix_mult_kernel(TType* __restrict__ d_out,
       a_shared[y][x] =
           d_in_a[global_y * num_cols_a + block_offset * TTileDim + x];
     }
+
     // Loading corresponding elements of B to shared memory in transposed
     // fashion.
     if (global_x < num_cols_b && block_offset * TTileDim + y < num_cols_a) {

@@ -63,6 +63,7 @@ __global__ void compute_velocity_kernel(double* __restrict__ d_velocity,
   int global_y = blockIdx.y * TTileDim + y;
 
   if (global_x < num_inputs && global_y < num_neurons) {
+
     // Calculating gradient on the current mini-batch.
     double gradient = 0.0;
 
@@ -118,6 +119,7 @@ void Layer::ComputeActivationGpu(double* d_activation,
                                   const std::vector<double>& input) {
   GpuAllocationManager manager;
   int mini_batch_size = input.size() / (num_inputs_ - 1);
+
   // We allocate additional #mini_batch_size elements for input matrix because
   // for each input in the batch we want to add bias neuron input value.
   double* d_input = (double*)manager.AllocateDevice(
@@ -144,6 +146,7 @@ void Layer::ComputeActivationGpu(double* d_activation,
                           + ") occured while copying input data to device.";
     throw std::runtime_error(err_msg);
   }
+
   // Adding biases to input array by copying data from vector to device.
   // This is the least hacky way to do it because there is no cuda memset
   // function for 8 byte words.

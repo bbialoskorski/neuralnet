@@ -79,6 +79,7 @@ void Layer::ComputeActivationCpu(const std::vector<double>& input) {
   int mini_batch_size = input.size() / (num_inputs_ - 1);
   int tile_dim =
       64 / sizeof(double);  // 64 bytes is most common cache line size.
+
   // Resizing activation to fit size of current mini-batch.
   activation_.resize(num_neurons_ * mini_batch_size);
   activation_.assign(activation_.size(), 0.0);
@@ -120,6 +121,7 @@ void Layer::ComputeActivationCpu(const std::vector<double>& input) {
         }
       }
     }
+
     // Adding bias to activations.
 #pragma omp for
     for (int a_y = 0; a_y < num_neurons_; ++a_y) {
@@ -136,6 +138,7 @@ void Layer::ComputeWeightedErrorCpu() {
   int tile_dim =
       64 / sizeof(double);  // 64 bytes is most common cache line size.
   int mini_batch_size = error_.size() / num_neurons_;
+
   // Resizing weighted_error to fit size of current mini batch.
   weighted_error_.resize((num_inputs_ - 1) * mini_batch_size);
   weighted_error_.assign(weighted_error_.size(), 0.0);
@@ -226,6 +229,7 @@ void Layer::ComputeVelocityCpu(const std::vector<double>& prev_layer_output,
   for (int i = 0; i < velocity_.size(); ++i) {
     int row = i / num_inputs_;
     int col = i - row * num_inputs_;
+
     // Calculating gradient on the current mini-batch.
     double gradient = 0.0;
 

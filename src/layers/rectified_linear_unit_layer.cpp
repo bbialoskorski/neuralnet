@@ -43,8 +43,10 @@ void ReLuLayer::InitializeWeights() {
 void ReLuLayer::ForwardPropCpu(const std::vector<double>& input) {
   ComputeActivationCpu(input);
   int mini_batch_size = input.size() / (num_inputs_ - 1);
+
   // Resizing output to fit size of current mini-batch.
   output_.resize(num_neurons_ * mini_batch_size);
+
   // Calculating outputs by using rectifier on previously computed activation.
 #pragma omp parallel for
   for (int i = 0; i < activation_.size(); ++i)
@@ -53,6 +55,7 @@ void ReLuLayer::ForwardPropCpu(const std::vector<double>& input) {
 
 void ReLuLayer::ComputeErrorCpu(const std::vector<double>& weighted_error_top) {
   int mini_batch_size = weighted_error_top.size() / num_neurons_;
+
   // Resizing error to fit size of current mini-batch.
   error_.resize(num_neurons_ * mini_batch_size);
 

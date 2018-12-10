@@ -107,6 +107,7 @@ void SigmoidOutputLayer::BackPropGpu(
  between 0 and 1.");
 
   int mini_batch_size = target_output.size() / num_neurons_;
+
   // Incrementing num_training_examples after back pass instead of forward pass
   // to maintain correctness in case of forward passes not being part of
   // training.

@@ -36,6 +36,7 @@ void NetJsonIoHandler::DumpToFile(Net& network, std::string file_path) {
   std::vector<std::shared_ptr<Layer>> layers = GetLayers(network);
 
   if (layers.empty()) throw std::logic_error("Dump called on empty network.");
+
   // Creating json representation of the network.
   nlohmann::json net_json;
   net_json["NetworkInfo"]["NumInputs"] = network.GetNumInputs();
@@ -62,6 +63,7 @@ void NetJsonIoHandler::DumpToFile(Net& network, std::string file_path) {
 void NetJsonIoHandler::LoadFromFile(Net& network, std::string file_path) {
   nlohmann::json net_json;
   std::ifstream file_stream(file_path);
+
   if (file_stream.is_open()) {
     file_stream >> net_json;
     file_stream.close();

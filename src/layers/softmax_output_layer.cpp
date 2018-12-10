@@ -39,6 +39,7 @@ void SoftmaxOutputLayer::InitializeWeights() {
 
 void SoftmaxOutputLayer::StableSoftmax() {
   int mini_batch_size = activation_.size() / num_neurons_;
+
   // Resizing output to fit size of current mini-batch.
   output_.resize(num_neurons_ * mini_batch_size);
 

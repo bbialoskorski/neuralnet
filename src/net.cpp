@@ -133,6 +133,7 @@ void Net::BackProp(const std::vector<double>& target_output, double momentum) {
  between 0 and 1.");
 
   std::vector<double> backprop_vector = target_output;
+
   // Propagates backward through layers.
   for (int layer_index = layers_.size() - 1; layer_index >= 0; --layer_index) {
     backprop_vector = layers_[layer_index]->BackProp(

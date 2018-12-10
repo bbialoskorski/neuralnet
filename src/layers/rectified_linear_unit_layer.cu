@@ -67,6 +67,7 @@ void ReLuLayer::ForwardPropGpu(const std::vector<double>& input) {
 
   dim3 grid(std::ceil((float)output_.size() / (float)kBlockSize));
   dim3 block(kBlockSize);
+
   // Applying rectifier to computed activation.
   rectifier_kernel<<<grid, block>>>(d_output, d_activation, input.size());
 
