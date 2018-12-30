@@ -2,7 +2,6 @@
 **neuralnet** is a c++ library for implementation of feedforward neural networks developed for educational purposes. For learning process of networks this project uses a variant of backpropagation algorithm called a mini-batch gradient descent with momentum. I've created two implementations for forward, backward propagation and updates: on GPU using CUDA and on CPU using OpenMP. I've tested network's ability to learn by training it on MNIST handwritten digits [data set](http://yann.lecun.com/exdb/mnist/) containing 60000 28x28 grayscale pictures for 10 epochs with 0.01 learning rate and 0.9 momentum coefficient. Network's topology was 784 neuron input layer, 800 neuron hidden layer with ReLu activation, and 10 neuron output layer using softmax activation function with cross entropy loss function. My network achieved **~98% accuracy** on test data set containing 10000 samples not used in training. **Achieved 19x speed up in training time when using gpu implementation vs cpu one.** Net was trained on Nvidia GTX 1050, Intel i7-3820 machine.
 
 This project includes documentation that can be found [here](https://bbialoskorski.github.io/neuralnet/annotated.html).
-
 ### Goals for this project:
 * Learn about feedforward neural networks.
 * Learn about parallel computing on cpu using OpenMP api.
@@ -37,7 +36,10 @@ network.AddLayer(hidden, 800);
 // classification ie. digit.
 network.AddLayer(output, 10);
 ```
-Now we can load our training data. In this example we are using MNIST handwritten digits dataset containing 60000 28x28 grayscale pictures. Training data is organized into a vector of mini-batches, each containing normalized pixel intensity values of 64 pictures laid in columns of 784 by 64 matrix stored as a vector using row major ordering.
+Now we can load our training data. In this example we are using MNIST handwritten digits dataset containing 60000 28x28 grayscale pictures.
+Sample of images from the dataset:
+![](https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png)
+Training data is organized into a vector of mini-batches, each containing normalized pixel intensity values of 64 pictures laid in columns of 784 by 64 matrix stored as a vector using row major ordering.
 ```c++
 // Preparing training data.
 std::vector<std::vector<double>> inputs = LoadTrainingInputs();
