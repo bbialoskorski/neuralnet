@@ -39,6 +39,7 @@ network.AddLayer(output, 10);
 Now we can load our training data. In this example we are using MNIST handwritten digits dataset containing 60000 28x28 grayscale pictures.
 Sample of images from the dataset:
 ![](https://upload.wikimedia.org/wikipedia/commons/2/27/MnistExamples.png)
+
 Training data is organized into a vector of mini-batches, each containing normalized pixel intensity values of 64 pictures laid in columns of 784 by 64 matrix stored as a vector using row major ordering.
 ```c++
 // Preparing training data.
