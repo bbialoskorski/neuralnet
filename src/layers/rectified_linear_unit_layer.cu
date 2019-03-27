@@ -52,11 +52,10 @@ __global__ void compute_relu_error_kernel(double* __restrict__ d_error,
 }
 
 void ReLuLayer::ForwardPropGpu(const std::vector<double>& input) {
-  GpuAllocationManager manager;
   int mini_batch_size = input.size() / (num_inputs_ - 1);
-  double* d_activation = (double*)manager.AllocateDevice(
+  double* d_activation = (double*)gpu_alloc_manager_.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
-  double* d_output = (double*)manager.AllocateDevice(
+  double* d_output = (double*)gpu_alloc_manager_.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
 
   // Resizing output and activation to fit size of current mini-batch.
@@ -94,8 +93,8 @@ void ReLuLayer::ForwardPropGpu(const std::vector<double>& input) {
   }
 
   // Freeing memory allocated on device.
-  manager.FreeDevice(d_activation);
-  manager.FreeDevice(d_output);
+  gpu_alloc_manager_.FreeDevice(d_activation);
+  gpu_alloc_manager_.FreeDevice(d_output);
 }
 
 void ReLuLayer::BackPropGpu(const std::vector<double>& weighted_error_top,
@@ -105,21 +104,20 @@ void ReLuLayer::BackPropGpu(const std::vector<double>& weighted_error_top,
     throw std::invalid_argument("momentum coefficient should have a value\
  between 0 and 1.");
 
-  GpuAllocationManager manager;
   int mini_batch_size = weighted_error_top.size() / num_neurons_;
-  double* d_error = (double*)manager.AllocateDevice(
+  double* d_error = (double*)gpu_alloc_manager_.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
-  double* d_activation = (double*)manager.AllocateDevice(
+  double* d_activation = (double*)gpu_alloc_manager_.AllocateDevice(
       activation_.size() * sizeof(double));
-  double* d_weights = (double*)manager.AllocateDevice(
+  double* d_weights = (double*)gpu_alloc_manager_.AllocateDevice(
       weights_.size() * sizeof(double));
-  double* d_velocity = (double*)manager.AllocateDevice(
+  double* d_velocity = (double*)gpu_alloc_manager_.AllocateDevice(
       velocity_.size() * sizeof(double));
-  double* d_weighted_error_top = (double*)manager.AllocateDevice(
+  double* d_weighted_error_top = (double*)gpu_alloc_manager_.AllocateDevice(
       weighted_error_top.size() * sizeof(double));
-  double* d_prev_layer_output = (double*)manager.AllocateDevice(
+  double* d_prev_layer_output = (double*)gpu_alloc_manager_.AllocateDevice(
       prev_layer_output.size() * sizeof(double));
-  double* d_weighted_error = (double*)manager.AllocateDevice(
+  double* d_weighted_error = (double*)gpu_alloc_manager_.AllocateDevice(
       (num_inputs_ - 1) * mini_batch_size * sizeof(double));
 
   // Resizing error and weigted_error to fit size of current mini-batch.
@@ -215,13 +213,13 @@ void ReLuLayer::BackPropGpu(const std::vector<double>& weighted_error_top,
   }
 
   // Freeing memory allocated on device.
-  manager.FreeDevice(d_error);
-  manager.FreeDevice(d_activation);
-  manager.FreeDevice(d_weights);
-  manager.FreeDevice(d_velocity);
-  manager.FreeDevice(d_weighted_error_top);
-  manager.FreeDevice(d_prev_layer_output);
-  manager.FreeDevice(d_weighted_error);
+  gpu_alloc_manager_.FreeDevice(d_error);
+  gpu_alloc_manager_.FreeDevice(d_activation);
+  gpu_alloc_manager_.FreeDevice(d_weights);
+  gpu_alloc_manager_.FreeDevice(d_velocity);
+  gpu_alloc_manager_.FreeDevice(d_weighted_error_top);
+  gpu_alloc_manager_.FreeDevice(d_prev_layer_output);
+  gpu_alloc_manager_.FreeDevice(d_weighted_error);
 }
 
 }

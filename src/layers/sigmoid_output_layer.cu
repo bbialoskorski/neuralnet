@@ -63,11 +63,10 @@ __global__ void update_kernel(double* __restrict__ d_weights,
 }
 
 void SigmoidOutputLayer::ForwardPropGpu(const std::vector<double>& input) {
-  GpuAllocationManager manager;
   int mini_batch_size = input.size() / (num_inputs_ - 1);
-  double* d_activations = (double*)manager.AllocateDevice(
+  double* d_activations = (double*)gpu_alloc_manager_.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
-  double* d_output = (double*)manager.AllocateDevice(
+  double* d_output = (double*)gpu_alloc_manager_.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
 
   // Resizing output and activation to fit size of current mini-batch.
@@ -95,8 +94,8 @@ void SigmoidOutputLayer::ForwardPropGpu(const std::vector<double>& input) {
   }
  
   // Freeing memory allocated on device.
-  manager.FreeDevice(d_activations);
-  manager.FreeDevice(d_output);
+  gpu_alloc_manager_.FreeDevice(d_activations);
+  gpu_alloc_manager_.FreeDevice(d_output);
 }
 
 void SigmoidOutputLayer::BackPropGpu(
@@ -113,20 +112,19 @@ void SigmoidOutputLayer::BackPropGpu(
   // training.
   num_training_examples_ += mini_batch_size;
 
-  GpuAllocationManager manager;
-  double* d_error = (double*)manager.AllocateDevice(
+  double* d_error = (double*)gpu_alloc_manager_.AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
-  double* d_weights = (double*)manager.AllocateDevice(
+  double* d_weights = (double*)gpu_alloc_manager_.AllocateDevice(
       weights_.size() * sizeof(double));
-  double* d_velocity = (double*)manager.AllocateDevice(
+  double* d_velocity = (double*)gpu_alloc_manager_.AllocateDevice(
       velocity_.size() * sizeof(double));
-  double* d_output = (double*)manager.AllocateDevice(
+  double* d_output = (double*)gpu_alloc_manager_.AllocateDevice(
       output_.size() * sizeof(double));
-  double* d_target_output = (double*)manager.AllocateDevice(
+  double* d_target_output = (double*)gpu_alloc_manager_.AllocateDevice(
       target_output.size() * sizeof(double));
-  double* d_prev_layer_output = (double*)manager.AllocateDevice(
+  double* d_prev_layer_output = (double*)gpu_alloc_manager_.AllocateDevice(
       prev_layer_output.size() * sizeof(double));
-  double* d_weighted_error = (double*)manager.AllocateDevice(
+  double* d_weighted_error = (double*)gpu_alloc_manager_.AllocateDevice(
       (num_inputs_ - 1) * mini_batch_size * sizeof(double));
 
   // Resizing error and weighted_error_ to fit size of current mini_batch.
@@ -220,23 +218,22 @@ void SigmoidOutputLayer::BackPropGpu(
   }
   
   // Freeing memory allocated on device.
-  manager.FreeDevice(d_error);
-  manager.FreeDevice(d_weights);
-  manager.FreeDevice(d_velocity);
-  manager.FreeDevice(d_output);
-  manager.FreeDevice(d_target_output);
-  manager.FreeDevice(d_prev_layer_output);
-  manager.FreeDevice(d_weighted_error);
+  gpu_alloc_manager_.FreeDevice(d_error);
+  gpu_alloc_manager_.FreeDevice(d_weights);
+  gpu_alloc_manager_.FreeDevice(d_velocity);
+  gpu_alloc_manager_.FreeDevice(d_output);
+  gpu_alloc_manager_.FreeDevice(d_target_output);
+  gpu_alloc_manager_.FreeDevice(d_prev_layer_output);
+  gpu_alloc_manager_.FreeDevice(d_weighted_error);
 }
 
 void SigmoidOutputLayer::UpdateGpu(double learning_rate) {
   if (learning_rate <= 0)
     throw std::invalid_argument("learning_rate has to be a positive number.");
 
-  GpuAllocationManager manager;
-  double* d_weights = (double*)manager.AllocateDevice(
+  double* d_weights = (double*)gpu_alloc_manager_.AllocateDevice(
       weights_.size() * sizeof(double));
-  double* d_velocity = (double*)manager.AllocateDevice(
+  double* d_velocity = (double*)gpu_alloc_manager_.AllocateDevice(
       velocity_.size() * sizeof(double));
 
   cudaError_t cuda_status;
@@ -282,8 +279,8 @@ void SigmoidOutputLayer::UpdateGpu(double learning_rate) {
   }
  
   // Freeing memory allocated on device.
-  manager.FreeDevice(d_weights);
-  manager.FreeDevice(d_velocity);
+  gpu_alloc_manager_.FreeDevice(d_weights);
+  gpu_alloc_manager_.FreeDevice(d_velocity);
 }
 
 } // namespace neuralnet
