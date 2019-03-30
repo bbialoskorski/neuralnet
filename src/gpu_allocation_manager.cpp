@@ -30,7 +30,7 @@ SOFTWARE.
 namespace neuralnet {
 
 long long GpuAllocationManager::allocation_id_ = 0;
-std::unordered_set<long long> GpuAllocationManager::allocated_set_;
+std::unordered_set<long long> GpuAllocationManager::allocated_ids_;
 
 long long GpuAllocationManager::GetLastAllocationId() {
   return allocation_id_ - 1;
@@ -38,7 +38,7 @@ long long GpuAllocationManager::GetLastAllocationId() {
 
 void* GpuAllocationManager::AllocateDevice(size_t size) {
   long long id = allocation_id_++;
-  allocated_set_.insert(id);
+  allocated_ids_.insert(id);
   void* d_ptr;
   cudaError_t cuda_status;
   cuda_status = cudaMalloc(&d_ptr, size + sizeof(long long));
@@ -92,12 +92,12 @@ pointer.";
     throw std::runtime_error(err_msg);
   }
 
-  allocated_set_.erase(id);
+  allocated_ids_.erase(id);
 }
 
 void GpuAllocationManager::PrintAllocationState() {
   std::cout << "Allocations not freed:";
-  for (long long id : allocated_set_) std::cout << " " << id;
+  for (long long id : allocated_ids_) std::cout << " " << id;
   std::cout << std::endl;
 }
 

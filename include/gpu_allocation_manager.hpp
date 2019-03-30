@@ -1,4 +1,4 @@
-/* Copyright (c) 2018 Bartosz Białoskórski
+/* Copyright (c) 2019 Bartosz Białoskórski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ class GpuAllocationManager {
    * @returns    Pointer to allocated device memory block.
    * @throws std::runtime_error If allocation failed.
    */
-  void* AllocateDevice(size_t size);
+  virtual void* AllocateDevice(size_t size);
   /**
    * @brief Frees device memory block.
    *
@@ -54,14 +54,14 @@ class GpuAllocationManager {
    *              free.
    * @throws std::runtime_error If freeing device memory failed.
    */
-  void FreeDevice(void* d_ptr);
+  virtual void FreeDevice(void* d_ptr);
   /** @brief Prints out unfreed allocations ids. */
   void PrintAllocationState();
 
  protected:
   static long long allocation_id_;
   /**< Id of the next allocation. */
-  static std::unordered_set<long long> allocated_set_;
+  static std::unordered_set<long long> allocated_ids_;
   /**< Set containing ids of unfreed device memory blocks. */
 };
 
