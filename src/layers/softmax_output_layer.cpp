@@ -31,7 +31,14 @@ SOFTWARE.
 
 namespace neuralnet {
 
-SoftmaxOutputLayer::SoftmaxOutputLayer() { type_ = "SoftmaxOutputLayer"; }
+SoftmaxOutputLayer::SoftmaxOutputLayer() {
+  type_ = "SoftmaxOutputLayer";
+  gpu_alloc_manager_ = std::make_shared<GpuAllocationManager>();
+}
+
+SoftmaxOutputLayer::SoftmaxOutputLayer(std::shared_ptr<GpuAllocationManager> gpu_alloc_manager) {
+  gpu_alloc_manager_ = gpu_alloc_manager;
+}
 
 void SoftmaxOutputLayer::InitializeWeights() {
   weights_.assign(weights_.size(), 0.0);

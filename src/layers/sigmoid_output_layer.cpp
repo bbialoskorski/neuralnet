@@ -32,7 +32,14 @@ SOFTWARE.
 
 namespace neuralnet {
 
-SigmoidOutputLayer::SigmoidOutputLayer() { type_ = "SigmoidOutputLayer"; }
+SigmoidOutputLayer::SigmoidOutputLayer() {
+  type_ = "SigmoidOutputLayer";
+  gpu_alloc_manager_ = std::make_shared<GpuAllocationManager>();
+}
+
+SigmoidOutputLayer::SigmoidOutputLayer(std::shared_ptr<GpuAllocationManager> gpu_alloc_manager) {
+  gpu_alloc_manager_ = gpu_alloc_manager; 
+}
 
 void SigmoidOutputLayer::InitializeWeights() {
   std::default_random_engine random_number_generator;

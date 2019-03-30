@@ -28,6 +28,7 @@ SOFTWARE.
 
 #include "gpu_allocation_manager.hpp"
 #include "weights_initialization_strategy.hpp"
+#include "gpu_stack_allocator.hpp"
 
 namespace neuralnet {
 
@@ -206,7 +207,7 @@ class Layer {
    * stored as a vector using row major ordering.
    */
 
-  GpuAllocationManager gpu_alloc_manager_ = GpuAllocationManager();
+  std::shared_ptr<GpuAllocationManager> gpu_alloc_manager_;
   /**<
    * Handler of gpu device memory allocations. This defaults to standard
    * handler which only wraps around standard real time allocations.

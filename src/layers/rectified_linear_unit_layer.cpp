@@ -28,9 +28,19 @@ SOFTWARE.
 
 #include <omp.h>
 
+#include "gpu_stack_allocator.hpp"
+
 namespace neuralnet {
 
-ReLuLayer::ReLuLayer() { type_ = "ReLuLayer"; }
+ReLuLayer::ReLuLayer() {
+  type_ = "ReLuLayer";
+  gpu_alloc_manager_ = std::make_shared<GpuAllocationManager>();
+}
+
+ReLuLayer::ReLuLayer(std::shared_ptr<GpuAllocationManager> gpu_alloc_manager) {
+  type_ = "ReLuLayer";
+  gpu_alloc_manager_ = gpu_alloc_manager;
+}
 
 void ReLuLayer::InitializeWeights() {
   std::default_random_engine generator;
