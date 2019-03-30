@@ -121,9 +121,9 @@ void Layer::ComputeActivationGpu(double* d_activation,
 
   // We allocate additional #mini_batch_size elements for input matrix because
   // for each input in the batch we want to add bias neuron input value.
-  double* d_input = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_input = (double*)gpu_alloc_manager_->AllocateDevice(
       (input.size() + mini_batch_size) * sizeof(double));
-  double* d_weights = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_weights = (double*)gpu_alloc_manager_->AllocateDevice(
       weights_.size() * sizeof(double));
   cudaError_t cuda_status;
 
@@ -192,8 +192,8 @@ void Layer::ComputeActivationGpu(double* d_activation,
   }
 
   // Freeing memory allocated on device.
-  gpu_alloc_manager_.FreeDevice(d_input);
-  gpu_alloc_manager_.FreeDevice(d_weights);
+  gpu_alloc_manager_->FreeDevice(d_weights);
+  gpu_alloc_manager_->FreeDevice(d_input);
 }
 
 void Layer::ComputeWeightedErrorGpu(double* d_weighted_error,
@@ -254,9 +254,9 @@ void Layer::UpdateGpu(double learning_rate) {
   if (learning_rate <= 0)
     throw std::invalid_argument("learning_rate has to be a positive number.");
 
-  double* d_weights = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_weights = (double*)(gpu_alloc_manager_.get())->AllocateDevice(
       weights_.size() * sizeof(double));
-  double* d_velocity = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_velocity = (double*)(gpu_alloc_manager_.get())->AllocateDevice(
       velocity_.size() * sizeof(double));;
 
   cudaError_t cuda_status;
@@ -298,8 +298,8 @@ void Layer::UpdateGpu(double learning_rate) {
   }
 
   // Freeing memory allocated on device.
-  gpu_alloc_manager_.FreeDevice(d_weights);
-  gpu_alloc_manager_.FreeDevice(d_velocity);
+  gpu_alloc_manager_->FreeDevice(d_velocity);
+  gpu_alloc_manager_->FreeDevice(d_weights);
 }
 
 } // namespace neuralnet

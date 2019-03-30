@@ -42,7 +42,7 @@ __global__ void cross_entropy_derivative_kernel(double* __restrict__ d_error,
 
 void SoftmaxOutputLayer::ForwardPropGpu(const std::vector<double>& input) {
   int mini_batch_size = input.size() / (num_inputs_ - 1);
-  double* d_activation = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_activation = (double*)gpu_alloc_manager_->AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
 
   // Resizing activation to fit size of current mini batch.
@@ -65,7 +65,7 @@ void SoftmaxOutputLayer::ForwardPropGpu(const std::vector<double>& input) {
   StableSoftmax();
 
   // Freeing memory allocated on device.
-  gpu_alloc_manager_.FreeDevice(d_activation);
+  gpu_alloc_manager_->FreeDevice(d_activation);
 }
 
 void SoftmaxOutputLayer::BackPropGpu(const std::vector<double>& target_output,
@@ -75,19 +75,19 @@ void SoftmaxOutputLayer::BackPropGpu(const std::vector<double>& target_output,
  between 0 and 1.");
 
   int mini_batch_size = target_output.size() / num_neurons_;
-  double* d_error = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_error = (double*)gpu_alloc_manager_->AllocateDevice(
       num_neurons_ * mini_batch_size * sizeof(double));
-  double* d_weights = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_weights = (double*)gpu_alloc_manager_->AllocateDevice(
       weights_.size() * sizeof(double));
-  double* d_velocity = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_velocity = (double*)gpu_alloc_manager_->AllocateDevice(
       velocity_.size() * sizeof(double));
-  double* d_output = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_output = (double*)gpu_alloc_manager_->AllocateDevice(
       output_.size() * sizeof(double));
-  double* d_target_output = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_target_output = (double*)gpu_alloc_manager_->AllocateDevice(
       target_output.size() * sizeof(double));
-  double* d_prev_layer_output = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_prev_layer_output = (double*)gpu_alloc_manager_->AllocateDevice(
       prev_layer_output.size() * sizeof(double));
-  double* d_weighted_error = (double*)gpu_alloc_manager_.AllocateDevice(
+  double* d_weighted_error = (double*)gpu_alloc_manager_->AllocateDevice(
       (num_inputs_ - 1) * mini_batch_size * sizeof(double));
 
   // Resizing error and weigted_error to fit size of current mini-batch.
@@ -182,13 +182,13 @@ void SoftmaxOutputLayer::BackPropGpu(const std::vector<double>& target_output,
   }
 
   // Freeing memory allocated on device.
-  gpu_alloc_manager_.FreeDevice(d_error);
-  gpu_alloc_manager_.FreeDevice(d_weights);
-  gpu_alloc_manager_.FreeDevice(d_velocity);
-  gpu_alloc_manager_.FreeDevice(d_output);
-  gpu_alloc_manager_.FreeDevice(d_target_output);
-  gpu_alloc_manager_.FreeDevice(d_prev_layer_output);
-  gpu_alloc_manager_.FreeDevice(d_weighted_error);
+  gpu_alloc_manager_->FreeDevice(d_weighted_error);
+  gpu_alloc_manager_->FreeDevice(d_prev_layer_output);
+  gpu_alloc_manager_->FreeDevice(d_target_output);
+  gpu_alloc_manager_->FreeDevice(d_output);
+  gpu_alloc_manager_->FreeDevice(d_velocity);
+  gpu_alloc_manager_->FreeDevice(d_weights);
+  gpu_alloc_manager_->FreeDevice(d_error);
 }
 
 }
