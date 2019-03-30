@@ -1,4 +1,4 @@
-/* Copyright (c) 2018 Bartosz Białoskórski
+/* Copyright (c) 2019 Bartosz Białoskórski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,17 @@ namespace neuralnet {
 class SoftmaxOutputLayer : public Layer {
  public:
   SoftmaxOutputLayer();
+
+  /**
+   * @brief Constructs SoftmaxOutputLayer using specified gpu memory
+   * allocation manager.
+   *
+   * @param gpu_alloc_manager GpuAllocationManager managing allocations of
+   * gpu device memory.
+   */
+  SoftmaxOutputLayer(std::shared_ptr<GpuAllocationManager> gpu_alloc_manager);
   ~SoftmaxOutputLayer(){};
+
   /**
    * @brief Computes cross entropy loss.
    *

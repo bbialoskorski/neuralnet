@@ -1,4 +1,4 @@
-/* Copyright (c) 2018 Bartosz Białoskórski
+/* Copyright (c) 2019 Bartosz Białoskórski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,6 +42,15 @@ namespace neuralnet {
 class SigmoidOutputLayer : public Layer {
  public:
   SigmoidOutputLayer();
+
+  /**
+  * @brief Constructs SigmoidOutputLayer using specified gpu memory
+  * allocation manager.
+  *
+  * @param gpu_alloc_manager GpuAllocationManager managing allocations of
+  * gpu device memory.
+  */
+  SigmoidOutputLayer(std::shared_ptr<GpuAllocationManager> gpu_alloc_manager);
   ~SigmoidOutputLayer(){};
 
   /* @brief Computes mean squared error.
