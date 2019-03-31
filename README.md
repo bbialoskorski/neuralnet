@@ -28,7 +28,7 @@ neuralnet::Net network(784, true);
 // big block of memory at the beggining of our program and then just manage
 // pointers to pieces of that block.
 std::shared_ptr<neuralnet::GpuAllocationManager> allocator = 
-	std::make_shared<neuralnet::GpuStackAllocator>(1000000000);
+    std::make_shared<neuralnet::GpuStackAllocator>(1000000000);
 // We pass this allocator to layers' constuctors.
 std::shared_ptr<neuralnet::Layer> hidden =
     std::make_shared<neuralnet::ReLuLayer>(allocator);
