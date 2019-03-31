@@ -1,5 +1,6 @@
+
 # neuralnet
-**neuralnet** is a c++ library for implementation of feedforward neural networks developed for educational purposes. For learning process of networks this project uses a variant of backpropagation algorithm called a mini-batch gradient descent with momentum. I've created two implementations for forward, backward propagation and updates: on GPU using CUDA and on CPU using OpenMP. I've tested network's ability to learn by training it on MNIST handwritten digits [data set](http://yann.lecun.com/exdb/mnist/) containing 60000 28x28 grayscale pictures for 10 epochs with 0.01 learning rate and 0.9 momentum coefficient. Network's topology was 784 neuron input layer, 800 neuron hidden layer with ReLu activation, and 10 neuron output layer using softmax activation function with cross entropy loss function. My network achieved **~98% accuracy** on test data set containing 10000 samples not used in training. **Achieved 19x speed up in training time when using gpu implementation vs cpu one.** Net was trained on Nvidia GTX 1050, Intel i7-3820 machine.
+**neuralnet** is a c++ library for implementation of feedforward neural networks developed for educational purposes. For learning process of networks this project uses a variant of backpropagation algorithm called a mini-batch gradient descent with momentum. I've created two implementations for forward, backward propagation and updates: on GPU using CUDA and on CPU using OpenMP. I've tested network's ability to learn by training it on MNIST handwritten digits [data set](http://yann.lecun.com/exdb/mnist/) containing 60000 28x28 grayscale pictures for 10 epochs with 0.01 learning rate and 0.9 momentum coefficient. Network's topology was 784 neuron input layer, 800 neuron hidden layer with ReLu activation, and 10 neuron output layer using softmax activation function with cross entropy loss function. My network achieved **~98% accuracy** on test data set containing 10000 samples not used in training. **Achieved 25x decrease in training time when using gpu implementation vs cpu one.** Net was trained on Nvidia GTX 1050, Intel i7-3820 machine.
 
 This project includes documentation that can be found [here](https://bbialoskorski.github.io/neuralnet/annotated.html).
 ### Goals for this project:
@@ -18,15 +19,21 @@ This project includes documentation that can be found [here](https://bbialoskors
 * Sigmoid Output Layer
 
 ### Example:
-Let's build our network. First argument to the constructor is the size of the input layer and second argument is a bool setting whether gpu implementation will be used.
+Let's build our network. First argument to the constructor is the size of the input layer and second argument is a bool setting whether gpu implementation will be used. We will also use custom gpu memory allocation manager: GpuStackAllocator which preallocates big block of memory at the beggining and then just manages pointers to pieces of that block. This allocator decreases computation time in comparison to standard cudaMalloc and cudaFree by about 25%.
 ```c++
 // Input layer size is 784 because each image in MNIST data set is 28x28
 // pixels.
 neuralnet::Net network(784, true);
+// GpuStackAllocator is a custom GpuAllocationManager which will preallocate
+// big block of memory at the beggining of our program and then just manage
+// pointers to pieces of that block.
+std::shared_ptr<neuralnet::GpuAllocationManager> allocator = 
+	std::make_shared<neuralnet::GpuStackAllocator>(1000000000);
+// We pass this allocator to layers' constuctors.
 std::shared_ptr<neuralnet::Layer> hidden =
-    std::make_shared<neuralnet::ReLuLayer>();
+    std::make_shared<neuralnet::ReLuLayer>(allocator);
 std::shared_ptr<neuralnet::Layer> output =
-    std::make_shared<neuralnet::SoftmaxOutputLayer>();
+    std::make_shared<neuralnet::SoftmaxOutputLayer>(allocator);
 
 // Hidden layer will use rectifier as an activation funcion and will have
 // 800 neurons (discounting bias neuron).
@@ -56,11 +63,11 @@ neuralnet::NetworkTrainer net_trainer(network);
 net_trainer.Train(inputs, labels, 0.01, 0.9, 10);
 ```
 Training on gpu resulted in the following output:
-![](https://i.imgur.com/utKvO8N.png)
+![](https://i.imgur.com/X0xC8bS.png)
 whereas training on cpu resulted in this output:
 ![](https://i.imgur.com/rARRkNp.png)
 
-**Gpu implementation ran almost 19 times faster!**
+**Gpu implementation ran almost 25 times faster!**
 
 After training is complete we can save our network to file:
 ```c++
