@@ -64,7 +64,7 @@ void* GpuStackAllocator::AllocateDevice(size_t size) {
   }
 }
 
-void GpuStackAllocator::FreeDevice(void * d_ptr) {
+void GpuStackAllocator::FreeDevice(void* d_ptr) {
   std::pair<size_t, long long> block_info;
   try {
     block_info = allocated_blocks_.at(d_ptr);
@@ -78,7 +78,7 @@ void GpuStackAllocator::FreeDevice(void * d_ptr) {
     allocated_blocks_.erase(d_ptr);
     allocated_ids_.erase(block_info.second);
   }
-  catch (std::out_of_range exception) {
+  catch (std::out_of_range& exception) {
     std::string err_msg = "Trying to free memory not allocated by gpu stack\
  allocator.";
     throw std::runtime_error(err_msg);
