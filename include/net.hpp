@@ -68,7 +68,7 @@ class Net {
    */
   Net(int input_layer_size, bool gpu_flag,
       std::shared_ptr<NetIoHandler> io_handler);
-  ~Net();
+  virtual ~Net();
 
   /**
    * @brief Given target output of most recent forward pass computes loss of
